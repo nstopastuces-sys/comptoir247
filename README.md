@@ -2,6 +2,11 @@
 
 Site statique de **COMPTOIR 247** (« Pour vous servir. ») : distributeurs automatiques de produits frais et locaux en Savoie, et équipement des professionnels.
 
+- **Démo client (non indexée)** : https://nstopastuces-sys.github.io/comptoir247/
+- **Suivi du projet** : [docs/SUIVI.md](docs/SUIVI.md)
+- **Check-list de mise en ligne** : [docs/MISE-EN-LIGNE.md](docs/MISE-EN-LIGNE.md)
+- **Historique** : [CHANGELOG.md](CHANGELOG.md)
+
 ## Pages
 
 | URL | Rôle SEO |
@@ -45,7 +50,7 @@ npx serve .
 
 ## Publication (GitHub Pages)
 
-Settings → Pages → Branch `main`, dossier `/ (root)`. Le dossier `_src/` est ignoré par Jekyll.
+Déjà activé : branche `main`, dossier `/ (root)`. Chaque push redéploie la démo en environ une minute. `_config.yml` empêche la publication des fichiers internes (`_src/`, `docs/`, README, CHANGELOG). Passage sur un nom de domaine : voir [docs/MISE-EN-LIGNE.md](docs/MISE-EN-LIGNE.md).
 
 ## Crédits
 

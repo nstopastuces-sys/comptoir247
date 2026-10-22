@@ -1,0 +1,8 @@
+# GitHub Pages (Jekyll) : le site est en HTML statique déjà généré.
+# On empêche la publication des fichiers internes.
+exclude:
+  - README.md
+  - CHANGELOG.md
+  - docs/
+  - _src/
+  - .gitignore
