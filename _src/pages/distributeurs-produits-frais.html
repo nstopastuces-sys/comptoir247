@@ -1,0 +1,197 @@
+<!--META
+{
+  "out": "distributeurs-produits-frais/index.html",
+  "url": "/distributeurs-produits-frais/",
+  "nav": "exploiter",
+  "priority": 0.9,
+  "title": "Distributeurs automatiques de produits frais et locaux en Savoie | COMPTOIR 247",
+  "ogTitle": "Nos Comptoirs : des produits frais et locaux 24h/24 – 7j/7",
+  "description": "Fromages, charcuterie, œufs, fruits et légumes, plats d'artisans : les distributeurs COMPTOIR 247 proposent des produits frais et locaux en Savoie, 24h/24 et 7j/7. Proposez-nous un emplacement.",
+  "breadcrumb": [{ "name": "Nos distributeurs de produits frais", "url": "/distributeurs-produits-frais/" }],
+  "faq": [
+    { "q": "Les produits sont-ils vraiment frais ?", "a": "Oui. Nos distributeurs sont des casiers réfrigérés : les produits y sont conservés au froid jusqu'à l'achat. Nous approvisionnons et suivons chaque casier nous-mêmes pour garantir la fraîcheur et la rotation des produits." },
+    { "q": "D'où viennent les produits ?", "a": "Nous sélectionnons des produits de qualité, en priorité auprès de producteurs et d'artisans de Savoie et des alentours : fromagers, éleveurs, maraîchers, charcutiers, traiteurs." },
+    { "q": "À quelle heure peut-on acheter ?", "a": "À n'importe quelle heure : nos Comptoirs sont accessibles 24h/24 et 7j/7, week-ends et jours fériés compris." },
+    { "q": "Où trouver un distributeur COMPTOIR 247 ?", "a": "Nos Comptoirs sont implantés en Savoie et alentours. Les emplacements et les nouvelles ouvertures sont publiés sur Instagram (@comptoir247)." },
+    { "q": "Comment accueillir un distributeur sur ma commune ou mon site ?", "a": "Contactez-nous via le formulaire en choisissant « Proposer un emplacement ». Nous étudions la visibilité, l'accès et le raccordement électrique, puis nous installons, approvisionnons et entretenons le Comptoir." },
+    { "q": "Je suis producteur : comment faire entrer mes produits dans vos Comptoirs ?", "a": "Écrivez-nous en choisissant « Producteur partenaire » dans le formulaire de contact, en présentant vos produits et votre exploitation. Nous privilégions les produits frais, locaux et de qualité." }
+  ],
+  "schema": [
+    {
+      "@type": "Service",
+      "@id": "{{site}}/distributeurs-produits-frais/#service",
+      "name": "Distributeurs automatiques de produits frais et locaux",
+      "serviceType": "Exploitation de distributeurs automatiques de produits frais (casiers réfrigérés)",
+      "provider": { "@id": "{{org}}" },
+      "areaServed": [{ "@type": "AdministrativeArea", "name": "Savoie" }, { "@type": "AdministrativeArea", "name": "Haute-Savoie" }],
+      "audience": { "@type": "PeopleAudience", "audienceType": "Particuliers, habitants, vacanciers" },
+      "hoursAvailable": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "00:00", "closes": "23:59" },
+      "description": "COMPTOIR 247 sélectionne des produits frais et locaux, approvisionne et suit ses propres distributeurs automatiques à casiers réfrigérés, et en gère entièrement les équipements. Les clients achètent 24h/24 – 7j/7.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Produits disponibles dans les Comptoirs",
+        "itemListElement": [
+          { "@type": "OfferCatalog", "name": "Fromages et produits laitiers" },
+          { "@type": "OfferCatalog", "name": "Charcuterie et viandes" },
+          { "@type": "OfferCatalog", "name": "Œufs et produits de la ferme" },
+          { "@type": "OfferCatalog", "name": "Fruits et légumes de saison" },
+          { "@type": "OfferCatalog", "name": "Plats préparés par des artisans" }
+        ]
+      }
+    }
+  ]
+}
+META-->
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="wrap page-hero__grid">
+    <div>
+      <span class="kicker reveal">Métier 1 · Exploiter</span>
+      <h1 class="reveal" id="page-title" style="--delay:.06s">Distributeurs automatiques de produits frais et locaux en Savoie<span class="dot">.</span></h1>
+      <p class="lead reveal" style="--delay:.12s">Nos propres Comptoirs&nbsp;: des casiers réfrigérés remplis de bons produits d'ici, accessibles 24h/24 – 7j/7, au plus près de chez vous.</p>
+      <div class="btn-row reveal" style="--delay:.18s">
+        {{btn:{{root}}contact/?profil=emplacement|Proposer un emplacement}}
+        {{btn:#produits|Voir les produits|btn--light}}
+      </div>
+    </div>
+    <div class="page-hero__media reveal" style="--delay:.1s">
+      <div class="vitrine split__media split__media--wide">
+        <video data-autoplay muted loop playsinline preload="none" poster="{{root}}assets/video/poster-6658225.jpg" aria-hidden="true">
+          <source src="{{root}}assets/video/plateau-fromages.mp4" type="video/mp4">
+        </video>
+        <span class="vitrine__door"></span>
+        <span class="vitrine__tag">Casier A1</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section--tight" aria-label="En bref">
+  <div class="wrap">
+    <div class="tldr reveal">
+      <h2>En bref</h2>
+      <ul>
+        <li>{{icon:check}}<span><strong>COMPTOIR 247 exploite ses propres distributeurs automatiques</strong> de produits frais et locaux, en Savoie et alentours.</span></li>
+        <li>{{icon:check}}<span><strong>Accessibles 24h/24 – 7j/7</strong>, y compris le soir, le week-end et les jours fériés.</span></li>
+        <li>{{icon:check}}<span><strong>Produits sélectionnés</strong> pour leur qualité et leur origine locale&nbsp;: fromages, charcuterie, œufs, fruits et légumes, plats d'artisans.</span></li>
+        <li>{{icon:check}}<span><strong>Tout est géré par nos soins</strong>&nbsp;: sélection, approvisionnement, suivi des casiers et entretien des équipements.</span></li>
+        <li>{{icon:check}}<span>Communes, entreprises, sites touristiques&nbsp;: <a href="#accueillir">vous pouvez accueillir un Comptoir</a>.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="produits" aria-labelledby="produits-title">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="bar reveal"></span>
+      <h2 class="h2 reveal" id="produits-title">Ce que vous trouvez dans nos Comptoirs<span class="dot">.</span></h2>
+      <span class="kicker reveal">Du frais, du local. Pas de snacking industriel.</span>
+    </div>
+    <ul class="products">
+      <li class="product reveal"><div class="vitrine"><img src="{{root}}assets/img/photos/fromagerie-800.jpg" alt="Fromages fermiers à la coupe" width="800" height="1200" loading="lazy" decoding="async"><span class="vitrine__door"></span></div><div class="product__body"><h3>Fromages &amp; produits laitiers</h3><p>Reblochon, tomme, beaufort, yaourts et lait de la ferme, selon les saisons et les producteurs.</p></div></li>
+      <li class="product reveal" style="--delay:.08s"><div class="vitrine"><img src="{{root}}assets/img/photos/planche-charcuterie-800.jpg" alt="Planche de charcuterie artisanale" width="800" height="533" loading="lazy" decoding="async"><span class="vitrine__door"></span></div><div class="product__body"><h3>Charcuterie &amp; viandes</h3><p>Diots, saucissons, jambons et colis de viande d'éleveurs et de bouchers locaux.</p></div></li>
+      <li class="product reveal" style="--delay:.16s"><div class="vitrine"><img src="{{root}}assets/img/photos/oeufs-fermiers-800.jpg" alt="Panier d'œufs fermiers" width="800" height="1200" loading="lazy" decoding="async" style="object-position:50% 60%"><span class="vitrine__door"></span></div><div class="product__body"><h3>Œufs &amp; produits de la ferme</h3><p>Œufs de poules élevées en plein air et produits fermiers du moment.</p></div></li>
+      <li class="product reveal"><div class="vitrine"><img src="{{root}}assets/img/photos/legumes-saison-800.jpg" alt="Légumes frais de saison" width="800" height="1067" loading="lazy" decoding="async"><span class="vitrine__door"></span></div><div class="product__body"><h3>Fruits &amp; légumes de saison</h3><p>Cueillis au bon moment par des maraîchers et arboriculteurs du coin.</p></div></li>
+      <li class="product reveal" style="--delay:.08s"><div class="vitrine"><img src="{{root}}assets/img/photos/plat-traiteur-800.jpg" alt="Plat cuisiné par un traiteur" width="800" height="1200" loading="lazy" decoding="async"><span class="vitrine__door"></span></div><div class="product__body"><h3>Plats d'artisans</h3><p>Plats cuisinés et spécialités préparés par des traiteurs et restaurateurs locaux.</p></div></li>
+      <li class="product reveal" style="--delay:.16s"><div class="vitrine"><img src="{{root}}assets/img/photos/reblochon-grille-800.jpg" srcset="{{root}}assets/img/photos/reblochon-grille-800.jpg 800w, {{root}}assets/img/photos/reblochon-grille-1600.jpg 1600w" sizes="(max-width: 560px) 100vw, 400px" alt="Reblochon à griller" width="800" height="533" loading="lazy" decoding="async"><span class="vitrine__door"></span></div><div class="product__body"><h3>Spécialités savoyardes</h3><p>Tout pour une raclette, une tartiflette ou une fondue improvisée, même à 22&nbsp;h.</p></div></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section section--paper" aria-labelledby="engagements-title">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="bar reveal"></span>
+      <h2 class="h2 reveal" id="engagements-title">Nos propres Comptoirs<span class="dot">.</span></h2>
+      <span class="kicker reveal">Nous exploitons des distributeurs de produits frais.</span>
+    </div>
+    <ul class="feats">
+      <li class="feat reveal">{{icon:cheese}}<div><h3>Nous sélectionnons</h3><p>des produits de qualité et locaux, auprès de producteurs et d'artisans que nous connaissons.</p></div></li>
+      <li class="feat reveal" style="--delay:.08s">{{icon:gear}}<div><h3>Nous gérons entièrement</h3><p>les équipements&nbsp;: installation, réglages, entretien et dépannage.</p></div></li>
+      <li class="feat reveal">{{icon:coldbox}}<div><h3>Nous approvisionnons</h3><p>et assurons le suivi des casiers&nbsp;: rotation, chaîne du froid, réassort.</p></div></li>
+      <li class="feat reveal" style="--delay:.08s">{{icon:clock}}<div><h3>Vous achetez 24h/24 – 7j/7</h3><p>au moment qui vous arrange, sans contrainte d'horaires.</p></div></li>
+    </ul>
+    <p class="kicker mt-l reveal" style="letter-spacing:.06em;text-transform:none;font-size:1.05rem;font-weight:600">Le bon produit, au bon endroit, au bon moment<span class="dot">.</span></p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="how-title">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="bar reveal"></span>
+      <h2 class="h2 reveal" id="how-title">Acheter dans un Comptoir<span class="dot">.</span></h2>
+    </div>
+    <ol class="steps">
+      <li class="step reveal">{{icon:lockers|step__icon}}<h3>Repérez votre casier</h3><p>Les produits sont visibles derrière les portes vitrées des casiers réfrigérés.</p></li>
+      <li class="step reveal" style="--delay:.1s">{{icon:card|step__icon}}<h3>Payez sur la borne</h3><p>Sélectionnez le numéro du casier et réglez directement sur le distributeur.</p></li>
+      <li class="step reveal" style="--delay:.2s">{{icon:key|step__icon}}<h3>Servez-vous</h3><p>La porte se déverrouille&nbsp;: votre produit vous attend, bien au frais.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section section--paper" aria-labelledby="ou-title">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="bar reveal"></span>
+      <h2 class="h2 reveal" id="ou-title">Où trouver nos Comptoirs<span class="dot">?</span></h2>
+      <span class="kicker reveal">Savoie et alentours</span>
+    </div>
+    <!-- Ajoutez ici vos emplacements : un <li class="spot"> par distributeur (nom, adresse, accès). -->
+    <ul class="spots">
+      <li class="spot reveal">{{icon:pin}}<h3>Savoie et alentours</h3><p>Nos distributeurs sont installés au cœur des villages, des stations et des lieux de passage.</p></li>
+      <li class="spot reveal" style="--delay:.08s">{{icon:instagram}}<h3>Les ouvertures sur Instagram</h3><p>Chaque nouvel emplacement est annoncé sur <a href="{{insta}}" target="_blank" rel="noopener">{{instaHandle}}</a>.</p></li>
+      <li class="spot reveal" style="--delay:.16s">{{icon:storefront}}<h3>Un Comptoir chez vous&nbsp;?</h3><p>Vous avez un emplacement idéal&nbsp;? <a href="#accueillir">Proposez-le nous</a>.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="accueillir" aria-labelledby="accueillir-title">
+  <div class="wrap split">
+    <div class="split__media vitrine">
+      <img src="{{root}}assets/img/photos/village-alpes-800.jpg" srcset="{{root}}assets/img/photos/village-alpes-800.jpg 800w, {{root}}assets/img/photos/village-alpes-1600.jpg 1600w" sizes="(max-width: 900px) 100vw, 560px" alt="Village de montagne en Haute-Savoie" width="800" height="1067" loading="lazy" decoding="async">
+      <span class="vitrine__door"></span>
+      <span class="vitrine__tag">Emplacement</span>
+    </div>
+    <div class="split__copy">
+      <span class="bar reveal"></span>
+      <h2 class="h2 reveal" id="accueillir-title">Accueillir un Comptoir sur votre site<span class="dot">.</span></h2>
+      <p class="lead reveal">Commune, station, camping, entreprise, parking ou zone d'activité&nbsp;: offrez un service de proximité utile à vos habitants, salariés ou vacanciers.</p>
+      <ul class="metier__list reveal">
+        <li>Un commerce de produits frais ouvert en permanence</li>
+        <li>Nous installons, approvisionnons et entretenons le distributeur</li>
+        <li>Un soutien concret aux producteurs du territoire</li>
+      </ul>
+      <div class="btn-row reveal">{{btn:{{root}}contact/?profil=emplacement|Proposer un emplacement}}</div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--ink" aria-labelledby="producteurs-title">
+  <div class="wrap split split--reverse">
+    <div class="split__media vitrine split__media--wide">
+      <video data-autoplay muted loop playsinline preload="none" poster="{{root}}assets/video/poster-35035963.jpg" aria-hidden="true">
+        <source src="{{root}}assets/video/maraicher.mp4" type="video/mp4">
+      </video>
+      <span class="vitrine__door"></span>
+    </div>
+    <div class="split__copy">
+      <span class="bar reveal"></span>
+      <h2 class="h2 reveal" id="producteurs-title">Producteur local&nbsp;? Entrez dans nos Comptoirs<span class="dot">.</span></h2>
+      <p class="lead reveal">Nous cherchons en permanence des producteurs et artisans qui partagent notre exigence de fraîcheur et de qualité.</p>
+      <div class="btn-row reveal">
+        {{btn:{{root}}contact/?profil=producteur|Devenir partenaire|btn--on-ink}}
+        {{btn:{{root}}equiper-professionnels/|Avoir mon propre distributeur|btn--on-ink}}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="faq-title">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="bar reveal"></span>
+      <h2 class="h2 reveal" id="faq-title">Vos questions sur nos distributeurs<span class="dot">.</span></h2>
+    </div>
+    {{faq}}
+  </div>
+</section>

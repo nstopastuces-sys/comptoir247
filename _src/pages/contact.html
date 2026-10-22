@@ -1,0 +1,59 @@
+<!--META
+{
+  "out": "contact/index.html",
+  "url": "/contact/",
+  "nav": "contact",
+  "priority": 0.6,
+  "title": "Contact — COMPTOIR 247, distributeurs de produits frais en Savoie",
+  "ogTitle": "Contacter COMPTOIR 247",
+  "description": "Un projet de distributeur automatique, un emplacement à proposer, des produits à référencer ? Contactez COMPTOIR 247, en Savoie et alentours.",
+  "breadcrumb": [{ "name": "Contact", "url": "/contact/" }],
+  "schema": [
+    { "@type": "ContactPage", "@id": "{{site}}/contact/#contact", "url": "{{site}}/contact/", "about": { "@id": "{{org}}" } }
+  ]
+}
+META-->
+<section class="page-hero" aria-labelledby="page-title" style="padding-bottom:24px">
+  <div class="wrap">
+    <span class="bar reveal"></span>
+    <h1 class="reveal" id="page-title">Parlons-en<span class="dot">.</span></h1>
+    <p class="lead reveal">Particulier, producteur, professionnel ou collectivité&nbsp;: dites-nous ce que vous cherchez.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:24px">
+  <div class="wrap contact-grid">
+    <form class="form reveal" data-mailto="{{email}}" novalidate>
+      <fieldset class="field">
+        <legend>Vous êtes…</legend>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="profil" value="professionnel" required><span>Professionnel&nbsp;: je veux mon distributeur</span></label>
+          <label class="choice"><input type="radio" name="profil" value="emplacement"><span>Je propose un emplacement</span></label>
+          <label class="choice"><input type="radio" name="profil" value="producteur"><span>Producteur&nbsp;: je veux être référencé</span></label>
+          <label class="choice"><input type="radio" name="profil" value="particulier"><span>Particulier / autre question</span></label>
+        </div>
+      </fieldset>
+      <div class="form__row">
+        <div class="field"><label for="nom">Nom et prénom</label><input id="nom" name="nom" autocomplete="name" required></div>
+        <div class="field"><label for="entreprise">Entreprise / commune <span class="muted">(facultatif)</span></label><input id="entreprise" name="entreprise" autocomplete="organization"></div>
+      </div>
+      <div class="form__row">
+        <div class="field"><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="telephone">Téléphone <span class="muted">(facultatif)</span></label><input id="telephone" name="telephone" type="tel" autocomplete="tel"></div>
+      </div>
+      <div class="field"><label for="message">Votre message</label><textarea id="message" name="message" required placeholder="Votre activité, vos produits, l'emplacement envisagé…"></textarea></div>
+      <div><button class="btn" type="submit"><span class="btn__in">Envoyer ma demande{{icon:arrow}}</span><span class="btn__door" aria-hidden="true">Envoyer ma demande</span></button></div>
+      <p class="form__status" role="status" aria-live="polite"></p>
+      <p class="form__note">Vos informations servent uniquement à répondre à votre demande. Elles ne sont ni revendues ni utilisées à d'autres fins.</p>
+    </form>
+
+    <aside class="contact-card reveal" style="--delay:.1s" aria-label="Coordonnées">
+      <h2>COMPTOIR 247<br><span style="font-weight:700;font-size:.8em">Pour vous servir<span class="dot">.</span></span></h2>
+      <div class="contact-line">{{icon:mail}}<div><span class="muted">E-mail</span><br><a href="mailto:{{email}}">{{email}}</a></div></div>
+      <div class="contact-line">{{icon:instagram}}<div><span class="muted">Instagram</span><br><a href="{{insta}}" target="_blank" rel="noopener">{{instaHandle}}</a></div></div>
+      <div class="contact-line">{{icon:pin}}<div><span class="muted">Zone d'intervention</span><br><strong>Savoie et alentours</strong></div></div>
+      <div class="contact-line">{{icon:clock}}<div><span class="muted">Nos Comptoirs</span><br><strong>Ouverts 24h/24 – 7j/7</strong></div></div>
+      {{mountains|footer__mountains}}
+    </aside>
+  </div>
+</section>

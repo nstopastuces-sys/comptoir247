@@ -1,0 +1,14 @@
+{
+  "name": "COMPTOIR 247 — Pour vous servir.",
+  "short_name": "COMPTOIR 247",
+  "description": "Distributeurs automatiques de produits frais et locaux en Savoie, 24h/24 – 7j/7.",
+  "lang": "fr",
+  "start_url": "./",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "assets/img/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

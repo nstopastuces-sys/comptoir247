@@ -1,0 +1,248 @@
+<!--META
+{
+  "out": "index.html",
+  "url": "/",
+  "nav": "home",
+  "priority": 1.0,
+  "title": "COMPTOIR 247 — Distributeurs automatiques de produits frais et locaux en Savoie",
+  "ogTitle": "COMPTOIR 247 — Le bon produit, au bon endroit, au bon moment.",
+  "description": "COMPTOIR 247 exploite des distributeurs automatiques de produits frais et locaux en Savoie, ouverts 24h/24 – 7j/7, et équipe les professionnels qui veulent leur propre point de vente automatique.",
+  "preload": ["assets/img/photos/reblochon-grille-480.jpg"],
+  "faq": [
+    { "q": "Qu'est-ce que COMPTOIR 247 ?", "a": "COMPTOIR 247 est une entreprise de Savoie qui a deux métiers : elle exploite ses propres distributeurs automatiques de produits frais et locaux, accessibles 24h/24 et 7j/7, et elle équipe les professionnels (producteurs, fromagers, bouchers, traiteurs, restaurants, hôtels, commerces, collectivités) qui veulent créer leur propre point de vente automatique." },
+    { "q": "Quels produits trouve-t-on dans un distributeur COMPTOIR 247 ?", "a": "Uniquement des produits frais, sélectionnés pour leur qualité et leur origine locale : fromages et produits laitiers, charcuterie et viandes, œufs, fruits et légumes de saison, plats préparés par des artisans. Pas de snacking industriel." },
+    { "q": "Quand peut-on acheter dans un Comptoir ?", "a": "Tout le temps : nos distributeurs sont accessibles 24h/24 et 7j/7, y compris le soir, le week-end et les jours fériés." },
+    { "q": "Où sont installés les distributeurs ?", "a": "En Savoie et alentours. Les nouveaux emplacements sont annoncés sur notre compte Instagram @comptoir247. Une commune, une entreprise ou un site touristique peut aussi nous proposer un emplacement." },
+    { "q": "Je suis producteur ou commerçant : pouvez-vous m'installer mon propre distributeur ?", "a": "Oui, c'est notre second métier. Nous proposons une solution clé en main, de l'idée à la mise en service : conception du point de vente, installation et démarrage, pour vendre vos produits 24h/24 – 7j/7." }
+  ],
+  "schema": [
+    {
+      "@type": "ItemList",
+      "name": "Les services de COMPTOIR 247",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "url": "{{site}}/distributeurs-produits-frais/", "name": "Exploitation de distributeurs automatiques de produits frais et locaux" },
+        { "@type": "ListItem", "position": 2, "url": "{{site}}/equiper-professionnels/", "name": "Équipement des professionnels en distributeurs automatiques clé en main" }
+      ]
+    }
+  ]
+}
+META-->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap hero__grid">
+    <div class="hero__copy">
+      <span class="kicker reveal">Savoie et alentours · 24h/24 – 7j/7</span>
+      <h1 class="display hero__title reveal" id="hero-title" style="--delay:.08s">Distributeurs de produits frais<span class="dot">.</span>
+        <small>Le bon produit, au bon endroit, au bon moment.</small></h1>
+      <p class="lead reveal" style="--delay:.16s">Fromages, charcuterie, œufs, fruits et légumes, plats d'artisans&nbsp;: des produits locaux, disponibles à toute heure près de chez vous. Et pour les professionnels, un distributeur clé en main.</p>
+      <div class="btn-row reveal" style="--delay:.24s">
+        {{btn:{{root}}distributeurs-produits-frais/|Découvrir nos Comptoirs}}
+        {{btn:{{root}}equiper-professionnels/|Équiper mon activité|btn--light}}
+      </div>
+      <div class="hero__meta reveal" style="--delay:.32s">
+        <span>{{icon:leaf}} Produits frais &amp; locaux</span>
+        <span>{{icon:clock}} Ouvert 24h/24 – 7j/7</span>
+        <span>{{icon:pin}} Savoie</span>
+      </div>
+      {{mountains|hero__mountains draw}}
+    </div>
+
+    <div class="machine reveal" style="--delay:.12s" aria-label="Illustration interactive : un distributeur COMPTOIR 247 à casiers réfrigérés">
+      <div class="machine__top">
+        <div class="machine__brand"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#logo-mark"/></svg><span>COMPTOIR 247<small>Pour vous servir<span class="dot">.</span></small></span></div>
+        <div class="machine__led" aria-hidden="true"><i></i><span data-clock>24:07</span><span>OUVERT</span></div>
+      </div>
+      <div class="machine__grid">
+        <button class="locker" type="button" aria-pressed="false" data-n="A1" data-product="Reblochon fermier"><span class="locker__inside"><img src="{{root}}assets/img/photos/reblochon-grille-480.jpg" alt="Reblochon fermier" width="480" height="480"></span><span class="locker__label">Reblochon fermier</span><span class="locker__door" data-n="A1"></span></button>
+        <button class="locker" type="button" aria-pressed="false" data-n="A2" data-product="Yaourts de la ferme"><span class="locker__inside"><img src="{{root}}assets/img/photos/yaourts-480.jpg" alt="Yaourts fermiers" width="480" height="480"></span><span class="locker__label">Yaourts de la ferme</span><span class="locker__door" data-n="A2"></span></button>
+        <button class="locker" type="button" aria-pressed="false" data-n="A3" data-product="Tomme &amp; Beaufort"><span class="locker__inside"><img src="{{root}}assets/img/photos/fromagerie-480.jpg" alt="Fromages fermiers à la coupe" width="480" height="480"></span><span class="locker__label">Tomme &amp; Beaufort</span><span class="locker__door" data-n="A3"></span></button>
+        <button class="locker" type="button" aria-pressed="false" data-n="B1" data-product="Œufs plein air"><span class="locker__inside"><img src="{{root}}assets/img/photos/oeufs-fermiers-480.jpg" alt="Œufs fermiers" width="480" height="480"></span><span class="locker__label">Œufs plein air</span><span class="locker__door" data-n="B1"></span></button>
+        <button class="locker" type="button" aria-pressed="false" data-n="B2" data-product="Diots &amp; saucisses"><span class="locker__inside"><img src="{{root}}assets/img/photos/diots-savoie-480.jpg" alt="Saucisses artisanales" width="480" height="480"></span><span class="locker__label">Diots &amp; saucisses</span><span class="locker__door" data-n="B2"></span></button>
+        <button class="locker" type="button" aria-pressed="false" data-n="B3" data-product="Légumes de saison"><span class="locker__inside"><img src="{{root}}assets/img/photos/legumes-saison-480.jpg" alt="Légumes de saison" width="480" height="480"></span><span class="locker__label">Légumes de saison</span><span class="locker__door" data-n="B3"></span></button>
+        <button class="locker" type="button" aria-pressed="false" data-n="C1" data-product="Lait de la ferme"><span class="locker__inside"><img src="{{root}}assets/img/photos/lait-ferme-480.jpg" alt="Bouteille de lait" width="480" height="480"></span><span class="locker__label">Lait de la ferme</span><span class="locker__door" data-n="C1"></span></button>
+        <button class="locker" type="button" aria-pressed="false" data-n="C2" data-product="Plat du traiteur"><span class="locker__inside"><img src="{{root}}assets/img/photos/plat-traiteur-480.jpg" alt="Plat préparé par un traiteur" width="480" height="480"></span><span class="locker__label">Plat du traiteur</span><span class="locker__door" data-n="C2"></span></button>
+        <button class="locker" type="button" aria-pressed="false" data-n="C3" data-product="Pommes du verger"><span class="locker__inside"><img src="{{root}}assets/img/photos/pommes-verger-480.jpg" alt="Pommes du verger" width="480" height="480"></span><span class="locker__label">Pommes du verger</span><span class="locker__door" data-n="C3"></span></button>
+      </div>
+      <div class="machine__pay">
+        <div class="machine__screen" data-screen aria-live="polite"><strong>Choisissez votre casier</strong>Produits frais &amp; locaux, 24h/24</div>
+        <div class="machine__keys" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track">
+    <span class="ticker__item">Fromages</span><span class="ticker__item">Charcuterie</span><span class="ticker__item">Œufs fermiers</span><span class="ticker__item">Fruits &amp; légumes</span><span class="ticker__item">Plats d'artisans</span><span class="ticker__item">Produits laitiers</span><span class="ticker__item">24h/24 – 7j/7</span><span class="ticker__item">Savoie et alentours</span>
+    <span class="ticker__item">Fromages</span><span class="ticker__item">Charcuterie</span><span class="ticker__item">Œufs fermiers</span><span class="ticker__item">Fruits &amp; légumes</span><span class="ticker__item">Plats d'artisans</span><span class="ticker__item">Produits laitiers</span><span class="ticker__item">24h/24 – 7j/7</span><span class="ticker__item">Savoie et alentours</span>
+  </div>
+</div>
+
+<section class="section" aria-labelledby="metiers-title">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="num reveal">1</span>
+      <span class="bar reveal"></span>
+      <h2 class="h2 reveal" id="metiers-title">Deux métiers<span class="dot">.</span><br>Une même ambition<span class="dot">.</span></h2>
+      <span class="kicker reveal">Rendre les bons produits accessibles, simplement.</span>
+    </div>
+    <div class="duo">
+      <article class="metier reveal">
+        <div class="vitrine">
+          <img src="{{root}}assets/img/photos/fromagerie-800.jpg" srcset="{{root}}assets/img/photos/fromagerie-800.jpg 800w, {{root}}assets/img/photos/fromagerie-1600.jpg 1600w" sizes="(max-width: 820px) 100vw, 600px" alt="Fromages locaux à la coupe" width="800" height="1200" loading="lazy" decoding="async" style="object-position:50% 40%">
+          <span class="vitrine__door"></span>
+          <span class="vitrine__tag">Exploiter</span>
+        </div>
+        <div class="metier__body">
+          <svg class="metier__icon" aria-hidden="true"><use href="#i-storefront"/></svg>
+          <h3 class="metier__title">Nous exploitons</h3>
+          <p><strong>des distributeurs automatiques de produits frais et locaux.</strong> De bons produits, près de chez vous, 24h/24 – 7j/7.</p>
+          <ul class="metier__list">
+            <li>Produits sélectionnés pour leur qualité et leur origine locale</li>
+            <li>Casiers approvisionnés et suivis par nos soins</li>
+            <li>Équipements entièrement gérés par COMPTOIR 247</li>
+          </ul>
+          {{btn:{{root}}distributeurs-produits-frais/|Nos distributeurs}}
+        </div>
+      </article>
+      <article class="metier reveal" style="--delay:.12s">
+        <div class="vitrine">
+          <img src="{{root}}assets/img/photos/cuisiniers-traiteur-800.jpg" srcset="{{root}}assets/img/photos/cuisiniers-traiteur-800.jpg 800w, {{root}}assets/img/photos/cuisiniers-traiteur-1600.jpg 1600w" sizes="(max-width: 820px) 100vw, 600px" alt="Artisans traiteurs en cuisine" width="800" height="533" loading="lazy" decoding="async">
+          <span class="vitrine__door"></span>
+          <span class="vitrine__tag">Équiper</span>
+        </div>
+        <div class="metier__body">
+          <svg class="metier__icon" aria-hidden="true"><use href="#i-handshake"/></svg>
+          <h3 class="metier__title">Nous équipons</h3>
+          <p><strong>les professionnels qui veulent leur point de vente 24h/24 – 7j/7.</strong> Une solution clé en main pour développer votre activité.</p>
+          <ul class="metier__list">
+            <li>De l'idée à la mise en service, un seul interlocuteur</li>
+            <li>Producteurs, artisans, restaurateurs, hôtels, collectivités</li>
+            <li>Vous produisez, vous vendez&nbsp;: nous vous équipons</li>
+          </ul>
+          {{btn:{{root}}equiper-professionnels/|Équiper mon activité}}
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="film" aria-labelledby="film-title">
+  <div class="film__media">
+    <video data-autoplay muted loop playsinline preload="none" poster="{{root}}assets/video/poster-3735629.jpg" aria-hidden="true">
+      <source src="{{root}}assets/video/frigo-produits-frais.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="film__doors" aria-hidden="true"><span></span><span></span></div>
+  <div class="film__content">
+    <div class="wrap">
+      <span class="kicker">Nos propres Comptoirs</span>
+      <h2 class="film__title" id="film-title">Frais. Local.<br>Toujours ouvert<span class="dot">.</span></h2>
+      <p class="lead">Une porte s'ouvre, le produit est là. Sans file d'attente, sans horaires, au plus près des producteurs.</p>
+      <div class="stats">
+        <div><strong>24h/24</strong><span>Accessible</span></div>
+        <div><strong>7j/7</strong><span>Même fériés</span></div>
+        <div><strong>100&nbsp;%</strong><span>Produits frais</span></div>
+        <div><strong>Savoie</strong><span>&amp; alentours</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="how-title">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="bar reveal"></span>
+      <h2 class="h2 reveal" id="how-title">Comment ça marche<span class="dot">?</span></h2>
+      <span class="kicker reveal">Trois gestes, à toute heure.</span>
+    </div>
+    <ol class="steps">
+      <li class="step reveal">{{icon:lockers|step__icon}}<h3>Choisissez votre casier</h3><p>Repérez votre produit derrière sa porte vitrée&nbsp;: tout est visible avant d'acheter.</p></li>
+      <li class="step reveal" style="--delay:.1s">{{icon:card|step__icon}}<h3>Réglez sur le distributeur</h3><p>Le paiement se fait directement sur la borne, en quelques secondes, de jour comme de nuit.</p></li>
+      <li class="step reveal" style="--delay:.2s">{{icon:key|step__icon}}<h3>La porte s'ouvre</h3><p>Récupérez votre produit, conservé au frais jusqu'au dernier moment. Bon appétit&nbsp;!</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section section--paper" aria-labelledby="pros-title">
+  <div class="wrap">
+    <div class="pros-head">
+      <div class="section-head" style="margin-bottom:0">
+        <span class="bar reveal"></span>
+        <h2 class="h2 reveal" id="pros-title">Nous équipons aussi les professionnels<span class="dot">.</span></h2>
+        <span class="kicker reveal">Une solution clé en main pour développer votre activité.</span>
+      </div>
+      <div class="reveal">
+        <p class="lead">Vous produisez. Vous vendez. Nous vous équipons. Votre propre distributeur, à votre image, ouvert 24h/24 – 7j/7.</p>
+        {{btn:{{root}}equiper-professionnels/|Voir la solution pro}}
+      </div>
+    </div>
+    <div>
+      <ul class="sectors reveal" id="secteurs" aria-label="Secteurs accompagnés">
+        <li class="sector"><a href="{{root}}equiper-professionnels/#fromagers">{{icon:cheese}}<span>Fromagers</span></a></li>
+        <li class="sector"><a href="{{root}}equiper-professionnels/#bouchers">{{icon:meat}}<span>Bouchers &amp; charcutiers</span></a></li>
+        <li class="sector"><a href="{{root}}equiper-professionnels/#traiteurs">{{icon:chef}}<span>Traiteurs &amp; restaurateurs</span></a></li>
+        <li class="sector"><a href="{{root}}equiper-professionnels/#producteurs">{{icon:leaf}}<span>Producteurs &amp; agriculteurs</span></a></li>
+        <li class="sector"><a href="{{root}}equiper-professionnels/#collectivites">{{icon:people}}<span>Écoles &amp; collectivités</span></a></li>
+        <li class="sector"><a href="{{root}}equiper-professionnels/#commerces">{{icon:shop}}<span>Commerces de proximité</span></a></li>
+        <li class="sector"><a href="{{root}}equiper-professionnels/#hotels">{{icon:hotel}}<span>Hôtels</span></a></li>
+        <li class="sector"><a href="{{root}}equiper-professionnels/#restaurants">{{icon:cutlery}}<span>Restaurants</span></a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="terroir" aria-labelledby="terroir-title">
+  <div class="terroir__media">
+    <video data-autoplay muted loop playsinline preload="none" poster="{{root}}assets/video/poster-18612289.jpg" aria-hidden="true">
+      <source src="{{root}}assets/video/tignes-savoie.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="wrap terroir__content">
+    <span class="kicker reveal">Savoie et alentours</span>
+    <h2 class="display reveal" id="terroir-title" style="margin-top:18px">Des solutions pour valoriser les produits frais et locaux<span class="dot">.</span></h2>
+    <p class="terroir__slogan reveal">Terre de goûts.<br>Terre d'opportunités.</p>
+    <div class="btn-row reveal mt-m">{{btn:{{root}}qui-sommes-nous/|Qui sommes-nous ?|btn--on-ink}}</div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="insta-title">
+  <div class="wrap">
+    <div class="insta-head">
+      <div>
+        <span class="bar reveal"></span>
+        <h2 class="h2 reveal" id="insta-title">Suivez nos Comptoirs<span class="dot">.</span></h2>
+        <span class="kicker reveal mt-m">Nouveaux emplacements, producteurs, nouveautés</span>
+      </div>
+      <a class="link-arrow reveal" href="{{insta}}" target="_blank" rel="noopener">{{icon:instagram}} {{instaHandle}} {{icon:arrow}}</a>
+    </div>
+    <ul class="insta">
+      <li class="reveal"><a href="{{insta}}" target="_blank" rel="noopener"><img src="{{root}}assets/img/instagram/qui-sommes-nous.jpg" alt="Publication Instagram COMPTOIR 247 : Qui sommes-nous ? Des solutions pour valoriser les produits frais et locaux." width="1254" height="1254" loading="lazy" decoding="async"></a></li>
+      <li class="reveal" style="--delay:.08s"><a href="{{insta}}" target="_blank" rel="noopener"><img src="{{root}}assets/img/instagram/deux-metiers.jpg" alt="Publication Instagram : Deux métiers, une même ambition — exploiter et équiper." width="1254" height="1254" loading="lazy" decoding="async"></a></li>
+      <li class="reveal" style="--delay:.16s"><a href="{{insta}}" target="_blank" rel="noopener"><img src="{{root}}assets/img/instagram/nos-propres-comptoirs.jpg" alt="Publication Instagram : Nos propres Comptoirs, nous exploitons des distributeurs de produits frais." width="1254" height="1254" loading="lazy" decoding="async"></a></li>
+      <li class="reveal" style="--delay:.24s"><a href="{{insta}}" target="_blank" rel="noopener"><img src="{{root}}assets/img/instagram/nous-equipons-les-pros.jpg" alt="Publication Instagram : Nous équipons aussi les professionnels." width="1254" height="1254" loading="lazy" decoding="async"></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section section--paper" aria-labelledby="faq-title">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="bar reveal"></span>
+      <h2 class="h2 reveal" id="faq-title">Questions fréquentes<span class="dot">.</span></h2>
+    </div>
+    {{faq}}
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="cta reveal">
+      <div>
+        <h2 class="h2">Un projet, un emplacement, une question<span class="dot">?</span></h2>
+        <p>Particulier, producteur, commune ou entreprise&nbsp;: écrivez-nous, nous vous répondons rapidement.</p>
+      </div>
+      <div class="btn-row">{{btn:{{root}}contact/|Nous contacter|btn--on-ink}}</div>
+      {{mountains|cta__mountains}}
+    </div>
+  </div>
+</section>
