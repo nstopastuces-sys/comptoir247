@@ -29,6 +29,7 @@ node _src/build.mjs
 
 ### À compléter avant la mise en ligne
 
+0. **Indexation** : la démo n'est pas indexée (`CONFIG.demo = true` : balise `noindex` sur toutes les pages, robots IA bloqués). Au lancement, passer `demo` à `false`.
 1. **Domaine** : `CONFIG.siteUrl` dans `_src/build.mjs` (et les URL de `llms.txt`), puis relancer le build.
 2. **E-mail de contact** : `CONFIG.email` (actuellement `contact@comptoir247.fr`, à confirmer).
 3. **Mentions légales** : champs surlignés dans `_src/pages/mentions-legales.html` (SIRET, adresse, responsable).

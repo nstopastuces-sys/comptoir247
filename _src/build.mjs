@@ -13,6 +13,9 @@ const ROOT = path.resolve(__dirname, "..");
 /* Configuration — à adapter (domaine définitif, e-mail de contact)    */
 /* ------------------------------------------------------------------ */
 const CONFIG = {
+  // Démo client : aucune page indexée (moteurs de recherche et robots IA).
+  // Passer à false au lancement sur le nom de domaine définitif, puis relancer le build.
+  demo: true,
   siteUrl: "https://nstopastuces-sys.github.io/comptoir247", // sans "/" final — remplacer par le nom de domaine définitif
   name: "COMPTOIR 247",
   slogan: "Pour vous servir.",
@@ -233,7 +236,7 @@ function layout(meta, body) {
 <title>${meta.title}</title>
 <meta name="description" content="${meta.description}">
 <link rel="canonical" href="${canonical}">
-<meta name="robots" content="${meta.noindex ? "noindex, follow" : "index, follow, max-image-preview:large"}">
+<meta name="robots" content="${CONFIG.demo ? "noindex, nofollow, noarchive, nosnippet, noimageindex" : meta.noindex ? "noindex, follow" : "index, follow, max-image-preview:large"}">
 <meta name="theme-color" content="#ffffff">
 <meta name="author" content="COMPTOIR 247">
 <meta name="geo.region" content="FR-73">
@@ -365,7 +368,19 @@ ${sitemap.map((u) => `  <url><loc>${u.loc}</loc><lastmod>${CONFIG.lastmod}</last
 </urlset>
 `
 );
-fs.writeFileSync(
+// En démo : les moteurs classiques peuvent lire les pages pour y voir le « noindex »
+// (un Disallow les en empêcherait), les robots IA sont bloqués, pas de sitemap annoncé.
+const AI_BOTS = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-SearchBot", "anthropic-ai", "PerplexityBot", "Google-Extended", "Applebot-Extended", "CCBot", "Bytespider", "meta-externalagent"];
+if (CONFIG.demo) fs.writeFileSync(
+  path.join(ROOT, "robots.txt"),
+  `# COMPTOIR 247 — version de démonstration, non indexée
+User-agent: *
+Allow: /
+
+${AI_BOTS.map((b) => `User-agent: ${b}\nDisallow: /`).join("\n\n")}
+`
+);
+else fs.writeFileSync(
   path.join(ROOT, "robots.txt"),
   `# COMPTOIR 247
 User-agent: *
