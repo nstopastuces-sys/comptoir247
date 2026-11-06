@@ -19,9 +19,16 @@ const CONFIG = {
   siteUrl: "https://nstopastuces-sys.github.io/comptoir247", // sans "/" final — remplacer par le nom de domaine définitif
   name: "COMPTOIR 247",
   slogan: "Pour vous servir.",
-  email: "contact@comptoir247.fr", // À CONFIRMER
+  email: "contact@comptoir247.fr",
+  // Envoi direct du formulaire de contact (service FormSubmit, sans compte ni clé).
+  // La toute première demande envoie un e-mail d'activation à l'adresse ci-dessus : cliquer sur « Activate Form ».
+  formEndpoint: "https://formsubmit.co/ajax/contact@comptoir247.fr",
+  phone: "06 62 83 36 53",
+  phoneIntl: "+33662833653",
   instagram: "https://www.instagram.com/comptoir247/",
   instagramHandle: "@comptoir247",
+  linkedin: "https://www.linkedin.com/company/comptoir247/",
+  facebook: "https://www.facebook.com/share/1EcQjTxARV/",
   area: "Savoie et alentours",
   locale: "fr_FR",
   lastmod: new Date().toISOString().slice(0, 10),
@@ -51,6 +58,9 @@ const ICONS = {
   arrow: `<path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"/>`,
   check: `<path d="m4.5 12.5 4.5 4.5L19.5 6.5"/>`,
   instagram: `<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor"/>`,
+  phone: `<path d="M6.6 3.5h3l1.5 4.2-2 1.4a11.5 11.5 0 0 0 5.8 5.8l1.4-2 4.2 1.5v3a2 2 0 0 1-2.2 2C10.4 18.9 5.1 13.6 4.6 5.7a2 2 0 0 1 2-2.2z"/>`,
+  linkedin: `<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7.6 10.4v6.2M7.6 7.4v.1M11.2 16.6v-6.2M11.2 13c0-1.6 1-2.7 2.5-2.7s2.4 1 2.4 2.7v3.6"/>`,
+  facebook: `<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M15.2 7.6h-1.6c-1.3 0-2.2.9-2.2 2.3V21M9.4 12.6h5.4"/>`,
   mail: `<rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="m3 6.5 9 6.5 9-6.5"/>`,
   menu: `<path d="M3.5 7h17M3.5 12h17M3.5 17h17"/>`,
   close: `<path d="M5.5 5.5l13 13M18.5 5.5l-13 13"/>`,
@@ -62,48 +72,10 @@ const ICONS = {
   dish: `<path d="M3 15.5h18M4.5 15.5a7.5 7.5 0 0 1 15 0"/><path d="M12 8V6.5M10.5 6.5h3M2.5 18.5h19"/>`,
 };
 
-// Logo complet (horloge, flèche, écusson de Savoie)
-const LOGO_RING = `
-  <path d="M22.4 80.6A80 80 0 0 1 72.6 24.8" fill="none" stroke="#e30613" stroke-width="7" stroke-linecap="round"/>
-  <path class="mk-tip" d="M88.6 20.1 74.2 16.2 78.9 30.7z" fill="#e30613"/>
-  <path d="M113.9 21.2A80 80 0 0 1 177.6 80.6" fill="none" stroke="#e30613" stroke-width="7" stroke-linecap="round"/>
-  <path d="M171.9 135.1A80 80 0 0 1 28.1 135.1" fill="none" stroke="#e30613" stroke-width="7" stroke-linecap="round"/>
-  <g stroke="#0e0e0e" stroke-width="2.6" stroke-linecap="round">
-    <line x1="100" y1="31" x2="100" y2="37" transform="rotate(30 100 100)"/>
-    <line x1="100" y1="31" x2="100" y2="37" transform="rotate(60 100 100)"/>
-    <line x1="100" y1="31" x2="100" y2="37" transform="rotate(120 100 100)"/>
-    <line x1="100" y1="31" x2="100" y2="37" transform="rotate(150 100 100)"/>
-    <line x1="100" y1="31" x2="100" y2="37" transform="rotate(210 100 100)"/>
-    <line x1="100" y1="31" x2="100" y2="37" transform="rotate(240 100 100)"/>
-    <line x1="100" y1="31" x2="100" y2="37" transform="rotate(300 100 100)"/>
-    <line x1="100" y1="31" x2="100" y2="37" transform="rotate(330 100 100)"/>
-  </g>`;
-const LOGO_SHIELD = (cx, cy, s = 1) => `
-  <g transform="translate(${cx} ${cy}) scale(${s})">
-    <path d="M-8.5 -8h17v7.6c0 6.4-4.2 10-8.5 11.6-4.3-1.6-8.5-5.2-8.5-11.6z" fill="#e30613"/>
-    <path d="M-1.6 -5.4h3.2v3.8h3.8v3.2h-3.8v4.6h-3.2v-4.6h-3.8v-3.2h3.8z" fill="#fff"/>
-  </g>`;
+// Logo officiel : assets/img/logo-comptoir247*.png (fourni par le client).
 
 const SPRITE = `<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
 ${Object.entries(ICONS).map(([k, v]) => `<symbol id="i-${k}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">${v}</symbol>`).join("\n")}
-<symbol id="logo" viewBox="0 0 200 200">
-  <circle cx="100" cy="100" r="99" fill="#fff"/>${LOGO_RING}
-  <path d="M100 26v40" stroke="#0e0e0e" stroke-width="2.4" stroke-linecap="round"/>
-  <path d="M100 30v14" stroke="#0e0e0e" stroke-width="4.4" stroke-linecap="round"/>
-  <text x="100" y="107" text-anchor="middle" textLength="182" lengthAdjust="spacingAndGlyphs" font-family="Montserrat, Arial Black, sans-serif" font-weight="800" font-size="25" fill="#0e0e0e">COMPTOIR 247</text>
-  <text x="176" y="122" text-anchor="end" font-family="Montserrat, Arial, sans-serif" font-weight="700" font-size="11.5" fill="#0e0e0e">Pour vous servir<tspan fill="#e30613">.</tspan></text>
-  ${LOGO_SHIELD(100, 143, 1)}
-  <path d="M100 160v9" stroke="#0e0e0e" stroke-width="4.6" stroke-linecap="round"/>
-</symbol>
-<symbol id="logo-mark" viewBox="0 0 200 200">
-  <circle cx="100" cy="100" r="99" fill="#fff"/>
-  <path d="M22.4 80.6A80 80 0 0 1 72.6 24.8" fill="none" stroke="#e30613" stroke-width="11" stroke-linecap="round"/>
-  <path d="M92 19.2 72 13.5 78.6 33.6z" fill="#e30613"/>
-  <path d="M113.9 21.2A80 80 0 1 1 22.4 80.6" fill="none" stroke="#e30613" stroke-width="11" stroke-linecap="round" stroke-dasharray="0" />
-  <path d="M100 28v58" stroke="#0e0e0e" stroke-width="7" stroke-linecap="round"/>
-  <path d="M100 100l30 18" stroke="#0e0e0e" stroke-width="7" stroke-linecap="round"/>
-  ${LOGO_SHIELD(100, 145, 1.55)}
-</symbol>
 <symbol id="mountains" viewBox="0 0 420 130">
   <path d="M2 126 40 112l30-14 22-16 12-6 14-16 14-14 12-16 8-12 8 10 10 6 14 16 16 12 14 12 12 8 12-12 14-16 14-14 8-6 8 10 14 12 20 16 24 16 30 16 48 20"/>
   <path d="M152 18l-2 12-6 12-4 16M152 18l6 18 10 14 8 16M104 76l6 8M274 34l-4 14-8 14M274 34l8 18 14 18 10 12M200 62l-6 10"/>
@@ -117,13 +89,17 @@ const mountains = (cls = "") => `<svg class="mountains ${cls}" viewBox="0 0 420 
 /* Navigation                                                          */
 /* ------------------------------------------------------------------ */
 const NAV = [
-  { key: "exploiter", label: "Nos distributeurs", url: "distributeurs-produits-frais/" },
-  { key: "equiper", label: "Équiper les pros", url: "equiper-professionnels/" },
+  { key: "equiper", label: "Je m'équipe", url: "equiper-professionnels/" },
+  { key: "exploiter", label: "Notre expertise", url: "distributeurs-produits-frais/" },
   { key: "about", label: "Qui sommes-nous ?", url: "qui-sommes-nous/" },
 ];
 
-const btn = (href, label, variant = "") =>
-  `<a class="btn ${variant}" href="${href}"><span class="btn__in">${label}${icon("arrow")}</span><span class="btn__door" aria-hidden="true">${label}</span></a>`;
+// Bouton « porte de casier ». inside : texte (en rouge) révélé quand la porte s'ouvre,
+// s'il diffère du libellé de la porte. Dans les pages : {{btn:lien|Libellé|variante|Texte intérieur}}
+const btn = (href, label, variant = "", inside = "") =>
+  inside
+    ? `<a class="btn btn--inside ${variant}" href="${href}" aria-label="${label} — ${inside}"><span class="btn__in"><span class="btn__stack"><span>${inside}</span><span class="btn__ghost" aria-hidden="true">${label}</span></span>${icon("arrow")}</span><span class="btn__door" aria-hidden="true">${label}</span></a>`
+    : `<a class="btn ${variant}" href="${href}"><span class="btn__in">${label}${icon("arrow")}</span><span class="btn__door" aria-hidden="true">${label}</span></a>`;
 
 /* ------------------------------------------------------------------ */
 /* Données structurées                                                 */
@@ -140,7 +116,7 @@ const orgSchema = () => ({
   url: `${CONFIG.siteUrl}/`,
   logo: `${CONFIG.siteUrl}/assets/img/logo-comptoir247.png`,
   image: `${CONFIG.siteUrl}/assets/img/og-comptoir247.jpg`,
-  sameAs: [CONFIG.instagram],
+  sameAs: [CONFIG.instagram, CONFIG.linkedin, CONFIG.facebook],
   areaServed: [
     { "@type": "AdministrativeArea", name: "Savoie" },
     { "@type": "AdministrativeArea", name: "Haute-Savoie" },
@@ -154,7 +130,7 @@ const orgSchema = () => ({
     "Point de vente automatique 24h/24",
     "Installation de distributeurs automatiques pour professionnels",
   ],
-  contactPoint: { "@type": "ContactPoint", contactType: "customer service", url: `${CONFIG.siteUrl}/contact/`, availableLanguage: "French", areaServed: "FR" },
+  contactPoint: { "@type": "ContactPoint", contactType: "customer service", telephone: CONFIG.phoneIntl, email: CONFIG.email, url: `${CONFIG.siteUrl}/contact/`, availableLanguage: "French", areaServed: "FR" },
 });
 const websiteSchema = () => ({
   "@type": "WebSite",
@@ -175,7 +151,7 @@ function renderFaq(faq) {
   return `<div class="faq">${faq
     .map(
       (q, i) =>
-        `<details${i === 0 ? " open" : ""}><summary><h3 class="sr-heading" style="font:inherit;letter-spacing:inherit;margin:0">${q.q}</h3><i aria-hidden="true"></i></summary><div class="faq__a"><p>${q.a}</p></div></details>`
+        `<details${i === 0 ? " open" : ""}><summary><h3 class="sr-heading" style="font:inherit;letter-spacing:inherit;margin:0">${q.q}</h3><i aria-hidden="true"></i></summary><div class="faq__a">${/^<(p|ul)>/.test(q.a) ? q.a : `<p>${q.a}</p>`}</div></details>`
     )
     .join("")}</div>`;
 }
@@ -186,7 +162,7 @@ function layout(meta, body) {
   const root = meta.absolute ? new URL(CONFIG.siteUrl).pathname.replace(/\/?$/, "/") : depth ? "../".repeat(depth) : "./";
   const canonical = `${CONFIG.siteUrl}${meta.url}`;
   const ogImage = `${CONFIG.siteUrl}/assets/img/${meta.ogImage || "og-comptoir247.jpg"}`;
-  const strip = (s) => s.replace(/<[^>]+>/g, "");
+  const strip = (s) => s.replace(/<\/(p|li)>/g, " ").replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
 
   const graph = [orgSchema(), websiteSchema(), {
     "@type": "WebPage",
@@ -266,12 +242,11 @@ ${(meta.preload || []).map((p) => `<link rel="preload" as="image" href="${root}$
 <body>
 <a class="skip-link" href="#contenu">Aller au contenu</a>
 ${SPRITE}
-<div class="curtain" aria-hidden="true"><div class="curtain__grid">${doors}</div><div class="curtain__brand"><svg viewBox="0 0 200 200"><use href="#logo"/></svg></div></div>
+<div class="curtain" aria-hidden="true"><div class="curtain__grid">${doors}</div><div class="curtain__brand"><img src="${root}assets/img/logo-comptoir247-240.png" alt="" width="240" height="245"></div></div>
 <header class="site-header">
   <div class="wrap site-header__inner">
     <a class="brand" href="${root}" aria-label="COMPTOIR 247 — accueil">
-      <svg class="brand__mark" viewBox="0 0 200 200" aria-hidden="true"><use href="#logo-mark"/></svg>
-      <span class="brand__text"><span class="brand__name">COMPTOIR 247</span><span class="brand__tag">Pour vous servir<span class="dot">.</span></span></span>
+      <img class="brand__logo" src="${root}assets/img/logo-comptoir247-240.png" alt="COMPTOIR 247 — Pour vous servir." width="240" height="245">
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
     <nav class="nav" id="nav" aria-label="Navigation principale">
@@ -288,17 +263,17 @@ ${body}
   <div class="wrap">
     <div class="footer__grid">
       <div>
-        <svg class="footer__logo" viewBox="0 0 200 200" role="img" aria-label="Logo COMPTOIR 247 — Pour vous servir."><use href="#logo"/></svg>
+        <img class="footer__logo" src="${root}assets/img/logo-comptoir247-240.png" alt="Logo COMPTOIR 247 — Pour vous servir." width="240" height="245" loading="lazy" decoding="async">
         ${mountains("footer__mountains draw")}
         <p class="footer__slogan">Terre de goûts.<br>Terre d'opportunités.</p>
       </div>
       <div>
         <h2>Nos métiers</h2>
         <ul>
-          <li><a href="${root}distributeurs-produits-frais/">Distributeurs de produits frais</a></li>
-          <li><a href="${root}distributeurs-produits-frais/#accueillir">Accueillir un Comptoir</a></li>
-          <li><a href="${root}equiper-professionnels/">Équiper les professionnels</a></li>
+          <li><a href="${root}equiper-professionnels/">Je m'équipe</a></li>
           <li><a href="${root}equiper-professionnels/#secteurs">Secteurs accompagnés</a></li>
+          <li><a href="${root}distributeurs-produits-frais/">Notre expertise</a></li>
+          <li><a href="${root}distributeurs-produits-frais/#emplacements">Où trouver nos Comptoirs</a></li>
         </ul>
       </div>
       <div>
@@ -312,7 +287,9 @@ ${body}
       <div>
         <h2>Nous suivre</h2>
         <ul>
-          <li><a class="social" href="${CONFIG.instagram}" rel="noopener" target="_blank">${icon("instagram")} ${CONFIG.instagramHandle}</a></li>
+          <li><a class="social" href="${CONFIG.instagram}" rel="noopener" target="_blank">${icon("instagram")} Instagram</a></li>
+          <li><a class="social" href="${CONFIG.linkedin}" rel="noopener" target="_blank">${icon("linkedin")} LinkedIn</a></li>
+          <li><a class="social" href="${CONFIG.facebook}" rel="noopener" target="_blank">${icon("facebook")} Facebook</a></li>
           <li style="display:flex;gap:10px;align-items:center">${icon("pin").replace('class=""', 'style="width:22px;height:22px;color:var(--red)"')} ${CONFIG.area}</li>
           <li style="display:flex;gap:10px;align-items:center">${icon("clock").replace('class=""', 'style="width:22px;height:22px;color:var(--red)"')} 24h/24 – 7j/7</li>
         </ul>
@@ -332,11 +309,16 @@ ${body}
   html = html
     .replaceAll("{{faq}}", renderFaq(meta.faq))
     .replaceAll("{{root}}", root)
-    .replace(/\{\{btn:([^|}]+)\|([^|}]+)(?:\|([^}]*))?\}\}/g, (_, h, l, v) => btn(h, l, v || ""))
+    .replace(/\{\{btn:([^|}]+)\|([^|}]+)(?:\|([^|}]*))?(?:\|([^}]*))?\}\}/g, (_, h, l, v, i) => btn(h, l, v || "", i || ""))
     .replace(/\{\{icon:([a-z]+)(?:\|([^}]*))?\}\}/g, (_, n, c) => icon(n, c || ""))
     .replace(/\{\{mountains(?:\|([^}]*))?\}\}/g, (_, c) => mountains(c || ""))
     .replaceAll("{{site}}", CONFIG.siteUrl)
     .replaceAll("{{email}}", CONFIG.email)
+    .replaceAll("{{formEndpoint}}", CONFIG.formEndpoint)
+    .replaceAll("{{phone}}", CONFIG.phone)
+    .replaceAll("{{phoneHref}}", "tel:" + CONFIG.phoneIntl)
+    .replaceAll("{{linkedin}}", CONFIG.linkedin)
+    .replaceAll("{{facebook}}", CONFIG.facebook)
     .replaceAll("{{insta}}", CONFIG.instagram)
     .replaceAll("{{instaHandle}}", CONFIG.instagramHandle);
   return html;

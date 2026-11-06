@@ -28,6 +28,18 @@
   }
   buildCurtain();
 
+  // Boutons .btn--peek : après l'ouverture de la page, leur porte s'entrouvre une fois
+  // pour montrer le texte rouge caché derrière (utile aussi sur mobile, sans survol).
+  var peeked = false;
+  function peekButtons() {
+    if (peeked || reduceMotion) return;
+    peeked = true;
+    document.querySelectorAll(".btn--peek").forEach(function (b, i) {
+      setTimeout(function () { b.classList.add("is-peek"); }, 1500 + i * 450);
+      setTimeout(function () { b.classList.remove("is-peek"); }, 4300 + i * 450);
+    });
+  }
+
   function openCurtain() {
     if (!root.classList.contains("is-arriving")) return;
     // deux frames : les portes sont dessinées fermées, puis s'ouvrent
@@ -36,6 +48,7 @@
         root.classList.add("is-opening");
         root.classList.remove("is-arriving");
         setTimeout(function () { root.classList.remove("is-opening"); }, 1300);
+        peekButtons();
       });
     });
   }
@@ -184,7 +197,9 @@
     }
   }
 
-  /* ---------- Formulaire de contact (ouverture du client mail) ---------- */
+  /* ---------- Formulaire de contact : envoi direct par e-mail ----------
+     La demande part vers data-endpoint (FormSubmit) qui la transmet par e-mail.
+     En cas d'échec réseau, on propose d'ouvrir la messagerie avec le message pré-rempli. */
   var form = document.querySelector("form[data-mailto]");
   if (form) {
     var params = new URLSearchParams(location.search);
@@ -209,9 +224,54 @@
       ].join("\n");
       var subject = "[Site] " + profil + " — " + (data.get("nom") || "");
       var to = form.getAttribute("data-mailto");
+      var endpoint = form.getAttribute("data-endpoint");
       var status = form.querySelector(".form__status");
-      if (status) status.textContent = "Votre messagerie s'ouvre avec le message pré-rempli. Il ne reste qu'à l'envoyer.";
-      window.location.href = "mailto:" + to + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      var submit = form.querySelector('button[type="submit"]');
+      var mailto = "mailto:" + to + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      var say = function (msg, ok) {
+        if (!status) return;
+        status.textContent = msg;
+        status.classList.toggle("is-ok", !!ok);
+        status.classList.toggle("is-error", ok === false);
+      };
+      var fallback = function () {
+        say("L'envoi n'a pas abouti. ", false);
+        if (status) {
+          var a = document.createElement("a");
+          a.href = mailto;
+          a.textContent = "Ouvrir ma messagerie avec le message pré-rempli";
+          status.appendChild(a);
+          status.appendChild(document.createTextNode(" ou écrivez-nous à " + to + "."));
+        }
+      };
+      if (!endpoint || !window.fetch) { window.location.href = mailto; return; }
+      if (data.get("_honey")) return; // robot
+      if (submit) submit.disabled = true;
+      say("Envoi en cours…");
+      fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          _subject: subject,
+          _replyto: data.get("email") || "",
+          _template: "table",
+          "Nom": data.get("nom") || "",
+          "Entreprise / commune": data.get("entreprise") || "-",
+          "E-mail": data.get("email") || "",
+          "Téléphone": data.get("telephone") || "-",
+          "Profil": profil,
+          "Message": data.get("message") || ""
+        })
+      })
+        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (res) {
+          if (res.ok && String(res.j.success) !== "false") {
+            form.reset();
+            say("Merci, votre demande est bien envoyée. Nous vous répondons rapidement.", true);
+          } else fallback();
+        })
+        .catch(fallback)
+        .then(function () { if (submit) submit.disabled = false; });
     });
   }
 

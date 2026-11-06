@@ -1,6 +1,6 @@
 # Suivi du projet — site COMPTOIR 247
 
-_Dernière mise à jour : 22 octobre 2026_
+_Dernière mise à jour : 6 novembre 2026_
 
 ## État actuel
 
@@ -29,19 +29,23 @@ _Dernière mise à jour : 22 octobre 2026_
 
 | Information | Où la mettre |
 | --- | --- |
-| E-mail de contact réel (actuellement `contact@comptoir247.fr`, provisoire) | `CONFIG.email` dans `_src/build.mjs` |
+| **Activer le formulaire** : faire une demande test sur la page Contact, puis cliquer « Activate Form » dans l'e-mail FormSubmit reçu sur contact@comptoir247.fr | Rien à modifier dans le code |
+| Vidéo de fond « Frais. Local. Toujours ouvert » (Hugo) | `assets/video/` + section `film` de `_src/pages/index.html` |
+| Adresses précises et photos de chaque Comptoir (Hugo) | Section `#emplacements` de `_src/pages/distributeurs-produits-frais.html` |
+| Lien Google My Business du Fonta'Distrib (Hugo) | Section `#cas-client` de `_src/pages/equiper-professionnels.html` (commentaire en place) |
+| Validation des blocs « Vente, location, leasing » et « Ce qui est inclus » (textes rédigés sans les conditions réelles) | Sections `#formules` et `#inclus` de `_src/pages/equiper-professionnels.html` |
+| Rôle exact de COMPTOIR 247 dans le projet du Fontanil (l'article ne le mentionne pas) | Section `#cas-client` |
+| Plaquette ou grille tarifaire (facultatif) | Section `#formules` |
 | Raison sociale, forme juridique, capital, adresse, SIRET, responsable de publication | `_src/pages/mentions-legales.html` (champs surlignés) |
-| Liste des emplacements des distributeurs (nom, adresse, accès) | Section « Où trouver nos Comptoirs ? » de `_src/pages/distributeurs-produits-frais.html` |
 | Moyens de paiement acceptés sur les bornes | Étapes « Comment ça marche ? » (accueil et page distributeurs) |
 | Relecture des textes, notamment l'accompagnement pro et l'après-mise en service | Pages sources dans `_src/pages/` |
 | Nom de domaine souhaité | Voir [MISE-EN-LIGNE.md](MISE-EN-LIGNE.md) |
-| Photos réelles des distributeurs (pour remplacer les photos d'illustration) | `assets/img/photos/` |
 
 ## Points d'attention
 
 - **Instagram** n'est pas accessible sans compte. La charte a été reprise des captures fournies dans le chat VSCode.
 - **Vidéos de distributeurs** : Pexels n'en propose aucune avec des produits frais (seulement des distributeurs de boissons au Japon). Des plans « frigo vitré » et « produits » les remplacent. À terme, une vidéo des vrais Comptoirs serait bien plus forte.
-- **Formulaire de contact** : il ouvre la messagerie du visiteur, rien n'est stocké. Pour un envoi direct, il faudra un service tiers (Formspree, Web3Forms, etc.).
+- **Formulaire de contact** : envoi direct via FormSubmit (gratuit, sans compte) vers contact@comptoir247.fr. Si l'envoi échoue, le visiteur peut ouvrir sa messagerie avec le message pré-rempli.
 - **Robots IA sur la démo** : le `robots.txt` n'est pris en compte qu'à la racine d'un domaine, donc pas sur `github.io/comptoir247`. La démo est protégée uniquement par la balise `noindex`.
 
 ## Historique

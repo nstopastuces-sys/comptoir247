@@ -12,10 +12,10 @@ Site statique de **COMPTOIR 247** (« Pour vous servir. ») : distributeurs auto
 | URL | Rôle SEO |
 | --- | --- |
 | `/` | Accueil : les deux métiers, distributeur animé |
-| `/distributeurs-produits-frais/` | Métier 1 « Exploiter » : particuliers, emplacements, producteurs partenaires |
-| `/equiper-professionnels/` | Métier 2 « Équiper » : solution clé en main, 8 secteurs (ancres `#fromagers`, `#bouchers`…) |
+| `/distributeurs-produits-frais/` | « Notre expertise » : nos propres Comptoirs (preuve par l'exemple), carte des emplacements, accueillir un Comptoir |
+| `/equiper-professionnels/` | « Je m'équipe » : solution clé en main, formules, inclus/exclu, cas client Fontanil, 8 secteurs (ancres `#fromagers`, `#bouchers`…) |
 | `/qui-sommes-nous/` | Présentation de l'entreprise |
-| `/contact/` | Formulaire (ouvre la messagerie avec un e-mail pré-rempli) |
+| `/contact/` | Formulaire envoyé directement par e-mail (FormSubmit) à contact@comptoir247.fr |
 | `/mentions-legales/` | Mentions légales et crédits médias |
 
 SEO / GEO : balises title/description/canonical/Open Graph, JSON-LD (`Organization`, `Service`, `FAQPage`, `HowTo`, `BreadcrumbList`), encadrés « En bref », FAQ, `sitemap.xml`, `robots.txt` (robots IA autorisés) et `llms.txt`.
@@ -29,16 +29,16 @@ node _src/build.mjs
 ```
 
 - `_src/build.mjs` : gabarit commun (en-tête, pied de page, icônes, logo SVG, rideau de casiers), données structurées, sitemap, robots.
-- `_src/pages/*.html` : contenu de chaque page ; le bloc `<!--META {…} META-->` en tête contient titre, description, FAQ et schémas.
+- `_src/pages/*.html` : contenu de chaque page (bouton : `{{btn:lien|Libellé|variante|Texte rouge révélé à l'ouverture}}`) ; le bloc `<!--META {…} META-->` en tête contient titre, description, FAQ et schémas.
 - `assets/css/style.css`, `assets/js/main.js` : styles et animations (portes de casiers, transitions de page, vidéos).
 
 ### À compléter avant la mise en ligne
 
 0. **Indexation** : la démo n'est pas indexée (`CONFIG.demo = true` : balise `noindex` sur toutes les pages, robots IA bloqués). Au lancement, passer `demo` à `false`.
 1. **Domaine** : `CONFIG.siteUrl` dans `_src/build.mjs` (et les URL de `llms.txt`), puis relancer le build.
-2. **E-mail de contact** : `CONFIG.email` (actuellement `contact@comptoir247.fr`, à confirmer).
+2. **Formulaire de contact** : activer FormSubmit (voir docs/SUIVI.md). E-mail, téléphone et réseaux dans `CONFIG`.
 3. **Mentions légales** : champs surlignés dans `_src/pages/mentions-legales.html` (SIRET, adresse, responsable).
-4. **Emplacements des distributeurs** : section « Où trouver nos Comptoirs ? » de `_src/pages/distributeurs-produits-frais.html`.
+4. **Emplacements des distributeurs** : adresses précises et photos dans la section `#emplacements` de `_src/pages/distributeurs-produits-frais.html`.
 
 ## Aperçu local
 

@@ -23,7 +23,8 @@ META-->
 
 <section class="section" style="padding-top:24px">
   <div class="wrap contact-grid">
-    <form class="form reveal" data-mailto="{{email}}" novalidate>
+    <form class="form reveal" data-mailto="{{email}}" data-endpoint="{{formEndpoint}}" novalidate>
+      <div class="form__hp" aria-hidden="true"><label for="_honey">Ne pas remplir</label><input id="_honey" name="_honey" tabindex="-1" autocomplete="off"></div>
       <fieldset class="field">
         <legend>Vous êtes…</legend>
         <div class="choices">
@@ -44,15 +45,16 @@ META-->
       <div class="field"><label for="message">Votre message</label><textarea id="message" name="message" required placeholder="Votre activité, vos produits, l'emplacement envisagé…"></textarea></div>
       <div><button class="btn" type="submit"><span class="btn__in">Envoyer ma demande{{icon:arrow}}</span><span class="btn__door" aria-hidden="true">Envoyer ma demande</span></button></div>
       <p class="form__status" role="status" aria-live="polite"></p>
-      <p class="form__note">Vos informations servent uniquement à répondre à votre demande. Elles ne sont ni revendues ni utilisées à d'autres fins.</p>
+      <p class="form__note">Votre demande nous est transmise directement par e-mail. Vos informations servent uniquement à y répondre&nbsp;: elles ne sont ni revendues ni utilisées à d'autres fins.</p>
     </form>
 
     <aside class="contact-card reveal" style="--delay:.1s" aria-label="Coordonnées">
       <h2>COMPTOIR 247<br><span style="font-weight:700;font-size:.8em">Pour vous servir<span class="dot">.</span></span></h2>
       <div class="contact-line">{{icon:mail}}<div><span class="muted">E-mail</span><br><a href="mailto:{{email}}">{{email}}</a></div></div>
-      <div class="contact-line">{{icon:instagram}}<div><span class="muted">Instagram</span><br><a href="{{insta}}" target="_blank" rel="noopener">{{instaHandle}}</a></div></div>
+      <div class="contact-line">{{icon:phone}}<div><span class="muted">Téléphone</span><br><a href="{{phoneHref}}">{{phone}}</a></div></div>
       <div class="contact-line">{{icon:pin}}<div><span class="muted">Zone d'intervention</span><br><strong>Savoie et alentours</strong></div></div>
       <div class="contact-line">{{icon:clock}}<div><span class="muted">Nos Comptoirs</span><br><strong>Ouverts 24h/24 – 7j/7</strong></div></div>
+      <div class="contact-line">{{icon:instagram}}<div><span class="muted">Nous suivre</span><br><a href="{{insta}}" target="_blank" rel="noopener">Instagram</a> · <a href="{{linkedin}}" target="_blank" rel="noopener">LinkedIn</a> · <a href="{{facebook}}" target="_blank" rel="noopener">Facebook</a></div></div>
       {{mountains|footer__mountains}}
     </aside>
   </div>
