@@ -22,7 +22,7 @@ _Dernière mise à jour : 6 novembre 2026_
   - transition entre les pages : un mur de casiers qui se ferme puis s'ouvre ;
   - photos et vidéos qui s'ouvrent comme des vitrines au défilement.
 - **SEO et GEO** : titres et descriptions par page, JSON-LD (Organization, Service, FAQPage, HowTo, BreadcrumbList), encadrés « En bref », FAQ, `sitemap.xml`, `robots.txt`, `llms.txt`.
-- **Médias** : photos réelles des Comptoirs et du Fonta'Distrib, carte des emplacements, 2 vidéos et des photos Pexels libres de droits (crédits dans les mentions légales).
+- **Médias** : photos réelles des Comptoirs et du Fonta'Distrib, carte des emplacements, 1 vidéo et des photos Pexels libres de droits (crédits dans les mentions légales).
 - **Vérifications** : captures ordinateur et mobile (390 px), pages en ligne en HTTP 200, 404 personnalisée fonctionnelle.
 
 ## En attente du client

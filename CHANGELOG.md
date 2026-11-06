@@ -1,5 +1,10 @@
 # Historique des versions
 
+## 2026-11-06 — Photo d'en-tête de « Je m'équipe »
+
+- La vidéo du plateau de fromages est remplacée par une photo retouchée et recadrée du Fonta'Distrib (distributeur aux couleurs d'un client)
+- Vidéo inutilisée supprimée et retirée des crédits
+
 ## 2026-11-06 — Logo et bandeau d'accueil
 
 - **Logo plus grand et lisible** : 104 px sur ordinateur (80 px après défilement), 88 px sur mobile, version haute définition pour les écrans Retina
