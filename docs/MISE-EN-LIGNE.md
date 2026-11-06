@@ -4,11 +4,13 @@
 
 ## 1. Contenus (avant tout)
 
-- [ ] E-mail de contact réel dans `CONFIG.email` (`_src/build.mjs`)
+- [ ] Formulaire de contact activé (demande test, puis « Activate Form » dans l'e-mail FormSubmit reçu sur contact@comptoir247.fr)
 - [ ] Mentions légales complètes, sans champ surligné (`_src/pages/mentions-legales.html`)
-- [ ] Emplacements des distributeurs renseignés (`_src/pages/notre-expertise.html`)
+- [ ] Adresses précises et photos des Comptoirs renseignées (`_src/pages/notre-expertise.html`, section `#emplacements`)
+- [ ] Blocs « Vente, location, leasing » et « Ce qui est inclus » validés (`_src/pages/je-m-equipe.html`)
+- [ ] Lien Google My Business du Fonta'Distrib ajouté (section `#cas-client`)
 - [ ] Textes relus et validés par le client
-- [ ] Photos réelles ajoutées si disponibles (sinon, photos Pexels déjà créditées)
+- [ ] Crédits des mentions légales à jour (retirer les photos Pexels qui ne sont plus affichées)
 
 ## 2. Nom de domaine
 
@@ -46,7 +48,7 @@ git push
 - [ ] `https://www.comptoir247.fr/robots.txt` annonce le sitemap et autorise les robots IA
 - [ ] `https://www.comptoir247.fr/sitemap.xml` liste les URL du domaine définitif
 - [ ] Une adresse inexistante affiche la page « Ce casier est vide »
-- [ ] Le formulaire de contact ouvre bien un e-mail vers la bonne adresse
+- [ ] Une demande envoyée depuis le formulaire de contact arrive bien sur contact@comptoir247.fr
 - [ ] Le partage du lien (WhatsApp, Facebook, LinkedIn) affiche l'image et le titre
 - [ ] Test des données structurées : https://search.google.com/test/rich-results
 - [ ] Test mobile et performance : https://pagespeed.web.dev/

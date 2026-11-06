@@ -2,6 +2,8 @@
 
 ## 2026-11-06 — Photo d'en-tête de « Je m'équipe »
 
+- Documentation à jour (README, suivi, check-list de mise en ligne)
+
 - La vidéo du plateau de fromages est remplacée par une photo retouchée et recadrée du Fonta'Distrib (distributeur aux couleurs d'un client)
 - Vidéo inutilisée supprimée et retirée des crédits
 

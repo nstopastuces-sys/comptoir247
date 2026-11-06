@@ -14,16 +14,18 @@ _Dernière mise à jour : 6 novembre 2026_
 
 ## Ce qui est fait
 
-- **Charte** reprise des visuels Instagram : blanc, noir, rouge `#E30613`, Montserrat très grasse, sous-titres en capitales espacées, traits rouges, montagnes au trait, logo horloge et écusson de Savoie redessiné en SVG.
-- **Pages** : Accueil, Nos distributeurs (métier « Exploiter »), Équiper les pros (métier « Équiper », 8 secteurs avec ancres), Qui sommes-nous ?, Contact, Mentions légales et crédits, page 404.
+- **Charte** reprise des visuels Instagram : blanc, noir, rouge `#E30613`, Montserrat très grasse, sous-titres en capitales espacées, traits rouges, montagnes au trait.
+- **Logo officiel** (PNG fourni par le client) : 104 px dans l'en-tête sur ordinateur, 88 px sur mobile, aussi dans le pied de page, le rideau de transition et l'icône mobile. Favicon redessiné d'après le logo.
+- **Pages** : Accueil, Je m'équipe (`/je-m-equipe/` : solution pro, formules, inclus/exclu, cas client Fonta'Distrib, 8 secteurs avec ancres), Notre expertise (`/notre-expertise/` : nos propres Comptoirs, carte des 2 emplacements), Qui sommes-nous ?, Contact, Mentions légales et crédits, page 404. Les anciennes adresses redirigent.
+- **Retours client du 6 novembre 2026** : tous appliqués (détail dans le [CHANGELOG](../CHANGELOG.md)), sauf les éléments en attente ci-dessous.
 - **Animations « porte de distributeur »** :
   - distributeur à casiers interactif en haut de l'accueil, avec horloge et écran ;
-  - boutons dont la façade s'ouvre comme une porte ;
+  - boutons dont la façade s'ouvre comme une porte (sur l'accueil, un texte rouge différent apparaît derrière, et les portes s'entrouvrent seules une fois à l'arrivée) ;
   - transition entre les pages : un mur de casiers qui se ferme puis s'ouvre ;
   - photos et vidéos qui s'ouvrent comme des vitrines au défilement.
 - **SEO et GEO** : titres et descriptions par page, JSON-LD (Organization, Service, FAQPage, HowTo, BreadcrumbList), encadrés « En bref », FAQ, `sitemap.xml`, `robots.txt`, `llms.txt`.
 - **Médias** : photos réelles des Comptoirs et du Fonta'Distrib, carte des emplacements, 1 vidéo et des photos Pexels libres de droits (crédits dans les mentions légales).
-- **Vérifications** : captures ordinateur et mobile (390 px), pages en ligne en HTTP 200, 404 personnalisée fonctionnelle.
+- **Vérifications** : captures ordinateur et mobile (vraie largeur 390 et 360 px), pages en ligne en HTTP 200, 404 personnalisée fonctionnelle, liens internes contrôlés.
 
 ## En attente du client
 
@@ -36,7 +38,7 @@ _Dernière mise à jour : 6 novembre 2026_
 | Rôle exact de COMPTOIR 247 dans le projet du Fontanil (l'article ne le mentionne pas) | Section `#cas-client` |
 | Plaquette ou grille tarifaire (facultatif) | Section `#formules` |
 | Raison sociale, forme juridique, capital, adresse, SIRET, responsable de publication | `_src/pages/mentions-legales.html` (champs surlignés) |
-| Moyens de paiement acceptés sur les bornes | Étapes « Comment ça marche ? » (accueil et page distributeurs) |
+| Moyens de paiement acceptés sur les bornes (le site dit « paiement par carte ») | Étapes « Comment ça marche ? » (accueil, Notre expertise) et bloc `#inclus` de Je m'équipe |
 | Relecture des textes, notamment l'accompagnement pro et l'après-mise en service | Pages sources dans `_src/pages/` |
 | Nom de domaine souhaité | Voir [MISE-EN-LIGNE.md](MISE-EN-LIGNE.md) |
 
@@ -45,6 +47,8 @@ _Dernière mise à jour : 6 novembre 2026_
 - **Instagram** n'est pas accessible sans compte. La charte a été reprise des captures fournies dans le chat VSCode.
 - **Vidéos** : la vidéo « frigo » de l'accueil a été remplacée par une photo d'un vrai Comptoir (demande client). Une vidéo tournée sur un vrai Comptoir pourrait la remplacer plus tard.
 - **Formulaire de contact** : envoi direct via FormSubmit (gratuit, sans compte) vers contact@comptoir247.fr. Si l'envoi échoue, le visiteur peut ouvrir sa messagerie avec le message pré-rempli.
+- **Déploiement GitHub Pages** : d'habitude environ une minute, mais il a déjà échoué une fois (« Timeout ») et bloqué en file d'attente. Remède : relancer une publication (commande dans le README).
+- **Cache navigateur** : GitHub Pages met les fichiers en cache 10 minutes. Le CSS et le JS sont versionnés, donc un simple rechargement suffit ; en cas de doute, Ctrl+F5.
 - **Robots IA sur la démo** : le `robots.txt` n'est pris en compte qu'à la racine d'un domaine, donc pas sur `github.io/comptoir247`. La démo est protégée uniquement par la balise `noindex`.
 
 ## Historique
