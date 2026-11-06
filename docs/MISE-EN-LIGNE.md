@@ -6,7 +6,7 @@
 
 - [ ] E-mail de contact réel dans `CONFIG.email` (`_src/build.mjs`)
 - [ ] Mentions légales complètes, sans champ surligné (`_src/pages/mentions-legales.html`)
-- [ ] Emplacements des distributeurs renseignés (`_src/pages/distributeurs-produits-frais.html`)
+- [ ] Emplacements des distributeurs renseignés (`_src/pages/notre-expertise.html`)
 - [ ] Textes relus et validés par le client
 - [ ] Photos réelles ajoutées si disponibles (sinon, photos Pexels déjà créditées)
 

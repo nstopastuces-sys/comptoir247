@@ -5,9 +5,15 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import crypto from "node:crypto";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
+
+// Empreinte des fichiers CSS/JS : le navigateur recharge la feuille de style dès qu'elle change
+// (sinon une ancienne version en cache peut s'afficher avec les nouvelles pages).
+const hashOf = (rel) => crypto.createHash("sha1").update(fs.readFileSync(path.join(ROOT, rel))).digest("hex").slice(0, 8);
+const ASSET_V = { css: hashOf("assets/css/style.css"), js: hashOf("assets/js/main.js") };
 
 /* ------------------------------------------------------------------ */
 /* Configuration — à adapter (domaine définitif, e-mail de contact)    */
@@ -89,8 +95,8 @@ const mountains = (cls = "") => `<svg class="mountains ${cls}" viewBox="0 0 420 
 /* Navigation                                                          */
 /* ------------------------------------------------------------------ */
 const NAV = [
-  { key: "equiper", label: "Je m'équipe", url: "equiper-professionnels/" },
-  { key: "exploiter", label: "Notre expertise", url: "distributeurs-produits-frais/" },
+  { key: "equiper", label: "Je m'équipe", url: "je-m-equipe/" },
+  { key: "exploiter", label: "Notre expertise", url: "notre-expertise/" },
   { key: "about", label: "Qui sommes-nous ?", url: "qui-sommes-nous/" },
 ];
 
@@ -230,12 +236,12 @@ function layout(meta, body) {
 <meta name="twitter:title" content="${meta.ogTitle || meta.title}">
 <meta name="twitter:description" content="${meta.description}">
 <meta name="twitter:image" content="${ogImage}">
-<link rel="icon" href="${root}favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="${root}assets/img/apple-touch-icon.png">
+<link rel="icon" href="${root}favicon.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="${root}assets/img/apple-touch-icon.png?v=2">
 <link rel="manifest" href="${root}site.webmanifest">
 <link rel="preload" href="${root}assets/fonts/montserrat-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
 ${(meta.preload || []).map((p) => `<link rel="preload" as="image" href="${root}${p}">`).join("\n")}
-<link rel="stylesheet" href="${root}assets/css/style.css">
+<link rel="stylesheet" href="${root}assets/css/style.css?v=${ASSET_V.css}">
 <script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('is-arriving')}catch(e){}</script>
 <script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@graph": graph })}</script>
 </head>
@@ -270,10 +276,10 @@ ${body}
       <div>
         <h2>Nos métiers</h2>
         <ul>
-          <li><a href="${root}equiper-professionnels/">Je m'équipe</a></li>
-          <li><a href="${root}equiper-professionnels/#secteurs">Secteurs accompagnés</a></li>
-          <li><a href="${root}distributeurs-produits-frais/">Notre expertise</a></li>
-          <li><a href="${root}distributeurs-produits-frais/#emplacements">Où trouver nos Comptoirs</a></li>
+          <li><a href="${root}je-m-equipe/">Je m'équipe</a></li>
+          <li><a href="${root}je-m-equipe/#secteurs">Secteurs accompagnés</a></li>
+          <li><a href="${root}notre-expertise/">Notre expertise</a></li>
+          <li><a href="${root}notre-expertise/#emplacements">Où trouver nos Comptoirs</a></li>
         </ul>
       </div>
       <div>
@@ -301,7 +307,7 @@ ${body}
     </div>
   </div>
 </footer>
-<script src="${root}assets/js/main.js" defer></script>
+<script src="${root}assets/js/main.js?v=${ASSET_V.js}" defer></script>
 </body>
 </html>
 `;
@@ -340,6 +346,30 @@ for (const file of fs.readdirSync(pagesDir).filter((f) => f.endsWith(".html")).s
   fs.writeFileSync(out, layout(meta, body));
   if (!meta.noindex) sitemap.push({ loc: `${CONFIG.siteUrl}${meta.url}`, priority: meta.priority ?? 0.7 });
   console.log("✓", meta.out);
+}
+
+// Anciennes adresses (avant le renommage des pages) : redirection vers la nouvelle,
+// en conservant l'ancre (#fromagers, #accueillir…).
+const REDIRECTS = {
+  "equiper-professionnels": "je-m-equipe",
+  "distributeurs-produits-frais": "notre-expertise",
+};
+for (const [from, to] of Object.entries(REDIRECTS)) {
+  const target = `${CONFIG.siteUrl}/${to}/`;
+  fs.mkdirSync(path.join(ROOT, from), { recursive: true });
+  fs.writeFileSync(
+    path.join(ROOT, from, "index.html"),
+    `<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<title>Page déplacée — COMPTOIR 247</title>
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="${target}">
+<meta http-equiv="refresh" content="0; url=../${to}/">
+<script>location.replace("../${to}/" + location.search + location.hash);</script>
+</head><body><p>Cette page a changé d'adresse : <a href="../${to}/">${target}</a></p></body></html>
+`
+  );
+  console.log("↪", `${from}/ → ${to}/`);
 }
 
 fs.writeFileSync(

@@ -31,9 +31,9 @@ _Dernière mise à jour : 6 novembre 2026_
 | --- | --- |
 | **Activer le formulaire** : faire une demande test sur la page Contact, puis cliquer « Activate Form » dans l'e-mail FormSubmit reçu sur contact@comptoir247.fr | Rien à modifier dans le code |
 | Vidéo de fond « Frais. Local. Toujours ouvert » (Hugo) | `assets/video/` + section `film` de `_src/pages/index.html` |
-| Adresses précises et photos de chaque Comptoir (Hugo) | Section `#emplacements` de `_src/pages/distributeurs-produits-frais.html` |
-| Lien Google My Business du Fonta'Distrib (Hugo) | Section `#cas-client` de `_src/pages/equiper-professionnels.html` (commentaire en place) |
-| Validation des blocs « Vente, location, leasing » et « Ce qui est inclus » (textes rédigés sans les conditions réelles) | Sections `#formules` et `#inclus` de `_src/pages/equiper-professionnels.html` |
+| Adresses précises et photos de chaque Comptoir (Hugo) | Section `#emplacements` de `_src/pages/notre-expertise.html` |
+| Lien Google My Business du Fonta'Distrib (Hugo) | Section `#cas-client` de `_src/pages/je-m-equipe.html` (commentaire en place) |
+| Validation des blocs « Vente, location, leasing » et « Ce qui est inclus » (textes rédigés sans les conditions réelles) | Sections `#formules` et `#inclus` de `_src/pages/je-m-equipe.html` |
 | Rôle exact de COMPTOIR 247 dans le projet du Fontanil (l'article ne le mentionne pas) | Section `#cas-client` |
 | Plaquette ou grille tarifaire (facultatif) | Section `#formules` |
 | Raison sociale, forme juridique, capital, adresse, SIRET, responsable de publication | `_src/pages/mentions-legales.html` (champs surlignés) |

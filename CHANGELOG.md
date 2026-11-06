@@ -1,5 +1,11 @@
 # Historique des versions
 
+## 2026-11-06 — Retours client (V2, complément)
+
+- **Adresses des pages renommées** : `/je-m-equipe/` et `/notre-expertise/` ; les anciennes adresses redirigent (ancres conservées)
+- Bouton « Voir la solution pro » de l'accueil renommé « Je m'équipe »
+- CSS, JS et favicon versionnés : le navigateur ne peut plus afficher une ancienne feuille de style avec les nouvelles pages
+
 ## 2026-11-06 — Retours client (V2)
 
 - **Logo officiel** (PNG fourni) dans l'en-tête, le pied de page, le rideau de transition, l'icône mobile ; favicon redessiné d'après le logo
