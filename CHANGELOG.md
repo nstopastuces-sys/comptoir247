@@ -1,5 +1,11 @@
 # Historique des versions
 
+## 2026-11-06 — Logo et bandeau d'accueil
+
+- **Logo plus grand et lisible** : 104 px sur ordinateur (80 px après défilement), 88 px sur mobile, version haute définition pour les écrans Retina
+- **Accueil** : la vidéo du frigo est remplacée par une photo d'un vrai Comptoir éclairé (« Frais. Local. Toujours ouvert. »)
+- Vidéos inutilisées supprimées (frigo, maraîcher) et retirées des crédits
+
 ## 2026-11-06 — Retours client (V2, complément)
 
 - **Adresses des pages renommées** : `/je-m-equipe/` et `/notre-expertise/` ; les anciennes adresses redirigent (ancres conservées)

@@ -28,7 +28,7 @@
   --gutter: clamp(16px, 4vw, 40px);
   --ease-door: cubic-bezier(.7, 0, .25, 1);
   --ease-out: cubic-bezier(.2, .8, .2, 1);
-  --header-h: 76px;
+  --header-h: 116px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -177,11 +177,15 @@ button { font: inherit; color: inherit; }
   border-bottom: 1px solid transparent;
   transition: border-color .3s, box-shadow .3s;
 }
-.site-header.is-scrolled { border-bottom-color: var(--line); }
-.site-header__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: var(--header-h); }
+.site-header.is-scrolled { border-bottom-color: var(--line); --header-h: 92px; }
+.site-header__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: var(--header-h); transition: height .35s var(--ease-out); }
 .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
-.brand__logo { height: 66px; width: auto; flex: none; }
-@media (max-width: 560px) { .brand__logo { height: 58px; } }
+/* Logo officiel : assez grand pour que « COMPTOIR 247 » reste lisible, y compris sur mobile */
+.brand__logo { height: calc(var(--header-h) - 12px); width: auto; flex: none; transition: height .35s var(--ease-out); }
+@media (max-width: 560px) {
+  :root { --header-h: 100px; }
+  .site-header.is-scrolled { --header-h: 88px; }
+}
 
 .nav { display: flex; align-items: center; gap: 30px; }
 .nav__list { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; }
@@ -760,3 +764,6 @@ html.is-arriving .curtain { animation: curtain-failsafe 0s linear 3s forwards; }
 .btn--inside .btn__door { justify-content: center; }
 .btn-row--stack { display: inline-grid; grid-template-columns: 1fr; }
 .section--ink .case__quote { color: rgba(255,255,255,.9); font-weight: 600; }
+/* Bandeau sur photo (plus chargée qu'une vidéo floue) : voile plus dense pour la lisibilité du titre */
+.film__media--photo img { object-position: 50% 40%; }
+.film__media--photo::after { background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.55) 45%, rgba(0,0,0,.82) 100%), linear-gradient(90deg, rgba(0,0,0,.55), transparent 75%); }

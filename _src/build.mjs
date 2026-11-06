@@ -252,7 +252,7 @@ ${SPRITE}
 <header class="site-header">
   <div class="wrap site-header__inner">
     <a class="brand" href="${root}" aria-label="COMPTOIR 247 — accueil">
-      <img class="brand__logo" src="${root}assets/img/logo-comptoir247-240.png" alt="COMPTOIR 247 — Pour vous servir." width="240" height="245">
+      <img class="brand__logo" src="${root}assets/img/logo-comptoir247-240.png" srcset="${root}assets/img/logo-comptoir247-240.png 240w, ${root}assets/img/logo-comptoir247.png 600w" sizes="104px" alt="COMPTOIR 247 — Pour vous servir." width="240" height="245">
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
     <nav class="nav" id="nav" aria-label="Navigation principale">

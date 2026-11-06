@@ -78,11 +78,8 @@ META-->
 </div>
 
 <section class="film" aria-labelledby="film-title">
-  <!-- Vidéo de fond provisoire : à remplacer par la vidéo envoyée par Hugo (assets/video/). -->
-  <div class="film__media">
-    <video data-autoplay muted loop playsinline preload="none" poster="{{root}}assets/video/poster-3735629.jpg" aria-hidden="true">
-      <source src="{{root}}assets/video/frigo-produits-frais.mp4" type="video/mp4">
-    </video>
+  <div class="film__media film__media--photo">
+    <img src="{{root}}assets/img/photos/comptoir-ouvert-1200.jpg" srcset="{{root}}assets/img/photos/comptoir-ouvert-800.jpg 800w, {{root}}assets/img/photos/comptoir-ouvert-1200.jpg 1200w" sizes="100vw" alt="Un Comptoir COMPTOIR 247 éclairé, ses casiers réfrigérés remplis de fromages, ouvert à toute heure" width="1200" height="900" loading="lazy" decoding="async">
   </div>
   <div class="film__doors" aria-hidden="true"><span></span><span></span></div>
   <div class="film__content">
