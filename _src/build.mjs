@@ -46,7 +46,7 @@ const CONFIG = {
   // Balise chargée uniquement après accord du visiteur (bandeau cookies, assets/js/main.js),
   // et seulement sur le site de production Netlify. Vide = pas de mesure ni de bandeau.
   // Peut aussi être fourni par la variable d'environnement Netlify GA_ID.
-  gaId: process.env.GA_ID || "GTM-PQQ73XXN",
+  gaId: process.env.GA_ID || "G-8BZW1694P1",
   linkedin: "https://www.linkedin.com/company/comptoir247/",
   facebook: "https://www.facebook.com/share/1EcQjTxARV/",
   area: "Savoie et alentours",
