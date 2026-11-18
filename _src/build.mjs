@@ -41,11 +41,12 @@ const CONFIG = {
   phoneIntl: "+33662833653",
   instagram: "https://www.instagram.com/comptoir247/",
   instagramHandle: "@comptoir247",
-  // Google Analytics 4 : ID de mesure « G-… » (Analytics → Admin → Flux de données → le flux Web).
+  // Balise Google (Google Analytics 4) : identifiant affiché par Google dans « Installer manuellement »
+  // (« GTM-… » pour la balise Google actuelle, ou ID de mesure « G-… »).
   // Balise chargée uniquement après accord du visiteur (bandeau cookies, assets/js/main.js),
   // et seulement sur le site de production Netlify. Vide = pas de mesure ni de bandeau.
   // Peut aussi être fourni par la variable d'environnement Netlify GA_ID.
-  gaId: process.env.GA_ID || "",
+  gaId: process.env.GA_ID || "GTM-PQQ73XXN",
   linkedin: "https://www.linkedin.com/company/comptoir247/",
   facebook: "https://www.facebook.com/share/1EcQjTxARV/",
   area: "Savoie et alentours",
@@ -54,7 +55,7 @@ const CONFIG = {
 };
 CONFIG.demo = !(CONFIG.launched && NETLIFY && process.env.CONTEXT === "production");
 // Mesure d'audience : jamais sur la démo GitHub ni sur les prévisualisations Netlify (statistiques faussées).
-CONFIG.analyticsId = NETLIFY && process.env.CONTEXT === "production" && /^G-[A-Z0-9]+$/.test(CONFIG.gaId) ? CONFIG.gaId : "";
+CONFIG.analyticsId = NETLIFY && process.env.CONTEXT === "production" && /^(G|GT|GTM)-[A-Z0-9]+$/.test(CONFIG.gaId) ? CONFIG.gaId : "";
 
 /* ------------------------------------------------------------------ */
 /* Icônes (trait, dans l'esprit des visuels Instagram) + logo          */

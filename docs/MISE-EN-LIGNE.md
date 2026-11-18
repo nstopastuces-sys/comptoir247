@@ -54,8 +54,8 @@ que les fichiers publics. GitHub Pages ne sert plus que de démo, toujours non i
 Le site charge la balise Google Analytics **uniquement après « Accepter »** dans le bandeau cookies, et seulement sur
 le site de production Netlify (ni démo GitHub, ni prévisualisations). Rien à coller dans les pages à la main.
 
-- [ ] Google Analytics : propriété et flux Web créés (URL `https://www.comptoir247.fr`) ; copier l'**ID de mesure** `G-XXXXXXXXXX` (Admin → Flux de données → le flux)
-- [ ] Mettre cet ID dans `gaId` (`_src/build.mjs`), puis commit et push. Sans ID : ni mesure ni bandeau
+- [x] Google Analytics : propriété et flux Web créés ; balise Google `GTM-PQQ73XXN` (code « Installer manuellement ») intégrée via `gaId` (`_src/build.mjs`). Sans ID : ni mesure ni bandeau
+- Normal : l'outil « balise détectée ? » de Google reste en avertissement, car son robot ne clique pas sur « Accepter ». Le vrai test, c'est le rapport Temps réel
 - [ ] Sur le site : « Accepter » dans le bandeau, puis Google Analytics → Rapports → **Temps réel** : la visite apparaît
 - [ ] Tout autre service tiers (pixel Facebook, carte, vidéo…) doit être déclaré dans la constante `CSP` de `_src/build.mjs`, sinon le navigateur le bloque
 

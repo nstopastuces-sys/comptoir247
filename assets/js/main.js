@@ -284,15 +284,18 @@
   };
   var gaLoaded = false;
   var loadGa = function () {
-    if (gaLoaded || !/^G-[A-Z0-9]+$/.test(gaId || "")) return;
+    if (gaLoaded || !/^(G|GT|GTM)-[A-Z0-9]+$/.test(gaId || "")) return;
     gaLoaded = true;
+    // Code fourni par Google (« Installer manuellement ») : balise Google servie par un conteneur GTM-…,
+    // ou balise gtag.js classique pour un ID de mesure G-….
+    var isContainer = gaId.indexOf("GTM-") === 0;
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { window.dataLayer.push(arguments); };
     window.gtag("js", new Date());
-    window.gtag("config", gaId);
+    if (!isContainer) window.gtag("config", gaId);
     var s = document.createElement("script");
     s.async = true;
-    s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(gaId);
+    s.src = "https://www.googletagmanager.com/" + (isContainer ? "gtm.js" : "gtag/js") + "?id=" + encodeURIComponent(gaId);
     document.head.appendChild(s);
   };
   // Retrait du consentement : suppression des cookies Google Analytics (_ga, _ga_XXXX…).
