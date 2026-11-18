@@ -265,6 +265,96 @@
     });
   }
 
+  /* ---------- Cookies : bandeau de consentement + Google Analytics (gtag.js) ----------
+     Règles CNIL : rien n'est chargé chez Google avant « Accepter » ; « Refuser » est aussi simple
+     qu'« Accepter » ; le choix est redemandé au bout de 6 mois ; il peut être modifié à tout moment
+     (lien « Gestion des cookies » du pied de page). Sans data-ga sur <body>, rien ne s'affiche. */
+  var gaId = document.body.getAttribute("data-ga");
+  var CONSENT_KEY = "c247-consent";
+  var CONSENT_DAYS = 182;
+  var readConsent = function () {
+    try {
+      var c = JSON.parse(localStorage.getItem(CONSENT_KEY) || "null");
+      if (c && (c.v === "oui" || c.v === "non") && Date.now() - c.t < CONSENT_DAYS * 864e5) return c.v;
+    } catch (err) {}
+    return null;
+  };
+  var saveConsent = function (v) {
+    try { localStorage.setItem(CONSENT_KEY, JSON.stringify({ v: v, t: Date.now() })); } catch (err) {}
+  };
+  var gaLoaded = false;
+  var loadGa = function () {
+    if (gaLoaded || !/^G-[A-Z0-9]+$/.test(gaId || "")) return;
+    gaLoaded = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag("js", new Date());
+    window.gtag("config", gaId);
+    var s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(gaId);
+    document.head.appendChild(s);
+  };
+  // Retrait du consentement : suppression des cookies Google Analytics (_ga, _ga_XXXX…).
+  var clearGaCookies = function () {
+    var host = location.hostname.replace(/^www\./, "");
+    document.cookie.split(";").forEach(function (c) {
+      var name = c.split("=")[0].trim();
+      if (!/^_ga|^_gid|^_gat/.test(name)) return;
+      [location.hostname, "." + host, ""].forEach(function (d) {
+        document.cookie = name + "=; Max-Age=0; path=/" + (d ? "; domain=" + d : "");
+      });
+    });
+  };
+  var banner = null;
+  var closeBanner = function () { if (banner) { banner.remove(); banner = null; } };
+  var choose = function (v) {
+    var before = readConsent();
+    saveConsent(v);
+    closeBanner();
+    if (v === "oui") loadGa();
+    else { clearGaCookies(); if (before === "oui" && gaLoaded) location.reload(); }
+  };
+  var mkBtn = function (label, cls, v) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "btn btn--small " + cls;
+    var inn = document.createElement("span"); inn.className = "btn__in"; inn.textContent = label;
+    var door = document.createElement("span"); door.className = "btn__door"; door.setAttribute("aria-hidden", "true"); door.textContent = label;
+    b.appendChild(inn); b.appendChild(door);
+    b.addEventListener("click", function () { choose(v); });
+    return b;
+  };
+  var openBanner = function () {
+    if (banner || !gaId) return;
+    banner = document.createElement("section");
+    banner.className = "consent";
+    banner.setAttribute("aria-label", "Gestion des cookies");
+    var p = document.createElement("p");
+    p.appendChild(document.createTextNode("Nous utilisons des cookies de mesure d'audience (Google Analytics) pour savoir comment le site est consulté et l'améliorer. Ils ne sont déposés qu'avec votre accord. "));
+    var more = document.createElement("a");
+    var footerLegal = document.querySelector('.site-footer a[href*="mentions-legales"]');
+    more.href = (footerLegal ? footerLegal.getAttribute("href") : "/mentions-legales/") + "#cookies";
+    more.textContent = "En savoir plus";
+    p.appendChild(more);
+    var row = document.createElement("div");
+    row.className = "consent__btns";
+    row.appendChild(mkBtn("Refuser", "btn--light", "non"));
+    row.appendChild(mkBtn("Accepter", "", "oui"));
+    banner.appendChild(p);
+    banner.appendChild(row);
+    document.body.appendChild(banner);
+  };
+  if (gaId) {
+    var consent = readConsent();
+    if (consent === "oui") loadGa();
+    else if (consent === null) openBanner();
+  }
+  document.querySelectorAll("[data-consent-open]").forEach(function (b) {
+    if (!gaId) { b.closest("li") && b.closest("li").remove(); return; }
+    b.addEventListener("click", function () { closeBanner(); openBanner(); var f = banner && banner.querySelector("button"); if (f) f.focus(); });
+  });
+
   /* ---------- Année ---------- */
   document.querySelectorAll("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 

@@ -41,6 +41,11 @@ const CONFIG = {
   phoneIntl: "+33662833653",
   instagram: "https://www.instagram.com/comptoir247/",
   instagramHandle: "@comptoir247",
+  // Google Analytics 4 : ID de mesure « G-… » (Analytics → Admin → Flux de données → le flux Web).
+  // Balise chargée uniquement après accord du visiteur (bandeau cookies, assets/js/main.js),
+  // et seulement sur le site de production Netlify. Vide = pas de mesure ni de bandeau.
+  // Peut aussi être fourni par la variable d'environnement Netlify GA_ID.
+  gaId: process.env.GA_ID || "",
   linkedin: "https://www.linkedin.com/company/comptoir247/",
   facebook: "https://www.facebook.com/share/1EcQjTxARV/",
   area: "Savoie et alentours",
@@ -48,6 +53,8 @@ const CONFIG = {
   lastmod: new Date().toISOString().slice(0, 10),
 };
 CONFIG.demo = !(CONFIG.launched && NETLIFY && process.env.CONTEXT === "production");
+// Mesure d'audience : jamais sur la démo GitHub ni sur les prévisualisations Netlify (statistiques faussées).
+CONFIG.analyticsId = NETLIFY && process.env.CONTEXT === "production" && /^G-[A-Z0-9]+$/.test(CONFIG.gaId) ? CONFIG.gaId : "";
 
 /* ------------------------------------------------------------------ */
 /* Icônes (trait, dans l'esprit des visuels Instagram) + logo          */
@@ -163,14 +170,17 @@ const websiteSchema = () => ({
 // Le modifier ici suffit : l'empreinte est recalculée à chaque build.
 const HEAD_SCRIPT = "try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('is-arriving')}catch(e){}";
 const HEAD_SCRIPT_HASH = crypto.createHash("sha256").update(HEAD_SCRIPT).digest("base64");
+// Google Analytics : domaines autorisés seulement si la mesure d'audience est active.
+// Tout autre service tiers (pixel Facebook, carte, vidéo…) doit être déclaré ici.
+const GOOGLE = Boolean(CONFIG.analyticsId);
 const CSP = [
   "default-src 'self'",
-  `script-src 'self' 'sha256-${HEAD_SCRIPT_HASH}'`,
+  `script-src 'self' 'sha256-${HEAD_SCRIPT_HASH}'${GOOGLE ? " https://www.googletagmanager.com" : ""}`,
   "style-src 'self' 'unsafe-inline'", // attributs style="" utilisés dans les pages
-  "img-src 'self' data:",
+  `img-src 'self' data:${GOOGLE ? " https://*.google-analytics.com https://*.googletagmanager.com" : ""}`,
   "font-src 'self'",
   "media-src 'self'",
-  "connect-src 'self'", // envoi du formulaire vers Netlify (même origine)
+  `connect-src 'self'${GOOGLE ? " https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com" : ""}`, // formulaire (Netlify) + mesure d'audience
   "form-action 'self'",
   "base-uri 'self'",
   "object-src 'none'",
@@ -276,7 +286,7 @@ ${(meta.preload || []).map((p) => `<link rel="preload" as="image" href="${root}$
 <script>${HEAD_SCRIPT}</script>
 <script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@graph": graph })}</script>
 </head>
-<body>
+<body${CONFIG.analyticsId ? ` data-ga="${CONFIG.analyticsId}"` : ""}>
 <a class="skip-link" href="#contenu">Aller au contenu</a>
 ${SPRITE}
 <div class="curtain" aria-hidden="true"><div class="curtain__grid">${doors}</div><div class="curtain__brand"><img src="${root}assets/img/logo-comptoir247-240.png" alt="" width="240" height="245"></div></div>
@@ -319,6 +329,7 @@ ${body}
           <li><a href="${root}qui-sommes-nous/">Qui sommes-nous ?</a></li>
           <li><a href="${root}contact/">Contact</a></li>
           <li><a href="${root}mentions-legales/">Mentions légales &amp; crédits</a></li>
+          <li><button type="button" class="linklike" data-consent-open>Gestion des cookies</button></li>
         </ul>
       </div>
       <div>
