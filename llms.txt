@@ -1,6 +1,6 @@
 # COMPTOIR 247
 
-> COMPTOIR 247 (« Pour vous servir. ») est une entreprise de Savoie (France) spécialisée dans la vente automatique de produits frais et locaux. Elle a deux métiers distincts : (1) exploiter ses propres distributeurs automatiques à casiers réfrigérés, accessibles 24h/24 – 7j/7 ; (2) équiper les professionnels qui veulent créer leur propre point de vente automatique, avec une solution clé en main. Zone : Savoie et alentours.
+> COMPTOIR 247 (« Pour vous servir. ») est une entreprise savoyarde (Savoie, France) spécialisée dans la vente automatique de produits frais et locaux. Elle a deux métiers distincts : (1) exploiter ses propres distributeurs automatiques à casiers réfrigérés, accessibles 24h/24 – 7j/7 ; (2) équiper les professionnels qui veulent créer leur propre point de vente automatique, avec une solution clé en main. Zone : Savoie et alentours.
 
 ## Faits clés
 
@@ -22,7 +22,7 @@
 
 ## Je m'équipe — équiper les professionnels
 
-- [Je m'équipe : distributeur automatique clé en main pour professionnels](https://nstopastuces-sys.github.io/comptoir247/je-m-equipe/) : accompagnement de l'idée à la mise en service (idée → conception → installation → mise en service 24/24 – 7j/7). Secteurs : fromagers, bouchers et charcutiers, traiteurs et restaurateurs, producteurs et agriculteurs, écoles et collectivités, commerces de proximité, hôtels, restaurants. Formules : vente, location ou leasing. Inclus : installation, formation, paiement et télémétrie, SAV, garantie. Atouts : vente hors horaires, Click & collect, surface de vente supplémentaire. Cas client : le Fonta'Distrib de la MFR-CFA du Fontanil (Saint-Alban-Leysse). Formule : « Vous produisez. Vous vendez. Nous vous équipons. »
+- [Je m'équipe : distributeur automatique clé en main pour professionnels](https://nstopastuces-sys.github.io/comptoir247/je-m-equipe/) : accompagnement de l'idée à la mise en service (idée → conception → installation → mise en service 24/24 – 7j/7). Secteurs : fromagers, bouchers et charcutiers, traiteurs et restaurateurs, producteurs et agriculteurs, écoles et collectivités, commerces de proximité, hôtels, restaurants. Formules : achat ou leasing. Inclus : installation, formation, paiement et télémétrie, SAV, garantie. Atouts : vente hors horaires, Click & collect, surface de vente supplémentaire. Cas client : le Fonta'Distrib de la MFR-CFA du Fontanil (Saint-Alban-Leysse). Formule : « Vous produisez. Nous vous équipons. Vous vendez. »
 
 ## Autres pages
 

@@ -15,7 +15,7 @@ Site statique de **COMPTOIR 247** (« Pour vous servir. ») : distributeurs auto
 | `/notre-expertise/` | « Notre expertise » : nos propres Comptoirs (preuve par l'exemple), carte des emplacements, accueillir un Comptoir |
 | `/je-m-equipe/` | « Je m'équipe » : solution clé en main, formules, inclus/exclu, cas client Fontanil, 8 secteurs (ancres `#fromagers`, `#bouchers`…) |
 | `/qui-sommes-nous/` | Présentation de l'entreprise, bloc « Deux métiers » |
-| `/contact/` | Formulaire envoyé directement par e-mail (FormSubmit) à contact@comptoir247.fr |
+| `/contact/` | Formulaire reçu par Netlify Forms, transféré par e-mail à contact@comptoir247.fr |
 | `/mentions-legales/` | Mentions légales et crédits médias |
 
 Anciennes adresses `/equiper-professionnels/` et `/distributeurs-produits-frais/` : pages de redirection générées par le build (ancres conservées).
@@ -37,10 +37,10 @@ node _src/build.mjs
 
 ### À compléter avant la mise en ligne
 
-0. **Indexation** : la démo n'est pas indexée (`CONFIG.demo = true` : balise `noindex` sur toutes les pages, robots IA bloqués). Au lancement, passer `demo` à `false`.
-1. **Domaine** : `CONFIG.siteUrl` dans `_src/build.mjs` (et les URL de `llms.txt`), puis relancer le build.
-2. **Formulaire de contact** : activer FormSubmit (voir docs/SUIVI.md). E-mail, téléphone et réseaux dans `CONFIG`.
-3. **Mentions légales** : champs surlignés dans `_src/pages/mentions-legales.html` (SIRET, adresse, responsable).
+0. **Indexation** : tant que `CONFIG.launched = false`, toutes les pages sont en `noindex` (robots IA bloqués). Au lancement, passer `launched` à `true` : seul le site de production Netlify devient indexable.
+1. **Domaine** : rien à modifier dans le code, l'adresse vient du domaine principal configuré dans Netlify (y compris dans `llms.txt`, réécrit dans `dist/`).
+2. **Formulaire de contact** : Netlify Forms (activer la détection des formulaires et la notification par e-mail dans Netlify, voir docs/MISE-EN-LIGNE.md). E-mail, téléphone et réseaux dans `CONFIG`.
+3. **Mentions légales** : complètes (directeur de la publication à faire confirmer par le client).
 4. **Emplacements des distributeurs** : adresses précises et photos dans la section `#emplacements` de `_src/pages/notre-expertise.html`.
 
 ## Aperçu local
@@ -51,9 +51,11 @@ N'importe quel serveur statique à la racine, par exemple :
 npx serve .
 ```
 
-## Publication (GitHub Pages)
+## Publication
 
-Déjà activé : branche `main`, dossier `/ (root)`. Chaque push redéploie la démo en environ une minute. Si GitHub bloque (déploiement en échec « Timeout » ou en file d'attente plusieurs minutes), relancer une publication : `gh api -X POST repos/nstopastuces-sys/comptoir247/pages/builds`. `_config.yml` empêche la publication des fichiers internes (`_src/`, `docs/`, README, CHANGELOG). Passage sur un nom de domaine : voir [docs/MISE-EN-LIGNE.md](docs/MISE-EN-LIGNE.md).
+**Netlify (site officiel)** : `netlify.toml` lance `node _src/build.mjs --dist` à chaque push sur `main` et publie `dist/`, qui ne contient que les fichiers publics, avec les en-têtes de sécurité (`_headers`) et les redirections 301 (`_redirects`). Étapes complètes : [docs/MISE-EN-LIGNE.md](docs/MISE-EN-LIGNE.md).
+
+**GitHub Pages (démo, à désactiver après le lancement)** : déjà activé : branche `main`, dossier `/ (root)`. Chaque push redéploie la démo en environ une minute. Si GitHub bloque (déploiement en échec « Timeout » ou en file d'attente plusieurs minutes), relancer une publication : `gh api -X POST repos/nstopastuces-sys/comptoir247/pages/builds`. `_config.yml` empêche la publication des fichiers internes (`_src/`, `docs/`, README, CHANGELOG). Passage sur un nom de domaine : voir [docs/MISE-EN-LIGNE.md](docs/MISE-EN-LIGNE.md).
 
 ## Crédits
 

@@ -1,6 +1,12 @@
 // Générateur statique du site COMPTOIR 247 — sans dépendance.
-// Usage : node _src/build.mjs
+// Usage : node _src/build.mjs          → pages générées à la racine du dépôt (démo GitHub Pages)
+//         node _src/build.mjs --dist   → idem, puis copie des seuls fichiers publics dans dist/ (Netlify)
 // Chaque page source (_src/pages/*.html) commence par un bloc <!--META {...} META-->.
+//
+// Deux hébergements :
+// - GitHub Pages (démo) : fichiers à la racine du dépôt, toujours en « noindex ».
+// - Netlify (site officiel) : Netlify lance la commande --dist (voir netlify.toml) et publie dist/.
+//   L'adresse du site vient alors de Netlify (variable URL : domaine principal configuré).
 
 import fs from "node:fs";
 import path from "node:path";
@@ -18,17 +24,19 @@ const ASSET_V = { css: hashOf("assets/css/style.css"), js: hashOf("assets/js/mai
 /* ------------------------------------------------------------------ */
 /* Configuration — à adapter (domaine définitif, e-mail de contact)    */
 /* ------------------------------------------------------------------ */
+const NETLIFY = Boolean(process.env.NETLIFY);
+const DEMO_URL = "https://nstopastuces-sys.github.io/comptoir247";
 const CONFIG = {
-  // Démo client : aucune page indexée (moteurs de recherche et robots IA).
-  // Passer à false au lancement sur le nom de domaine définitif, puis relancer le build.
-  demo: true,
-  siteUrl: "https://nstopastuces-sys.github.io/comptoir247", // sans "/" final — remplacer par le nom de domaine définitif
+  // Lancement : passer à true, commit, push. Seul le site de production Netlify devient alors
+  // indexable ; GitHub Pages et les prévisualisations Netlify restent en « noindex ».
+  launched: false,
+  siteUrl: NETLIFY && process.env.URL ? process.env.URL.replace(/\/+$/, "") : DEMO_URL, // sans "/" final
   name: "COMPTOIR 247",
   slogan: "Pour vous servir.",
   email: "contact@comptoir247.fr",
-  // Envoi direct du formulaire de contact (service FormSubmit, sans compte ni clé).
-  // La toute première demande envoie un e-mail d'activation à l'adresse ci-dessus : cliquer sur « Activate Form ».
-  formEndpoint: "https://formsubmit.co/ajax/contact@comptoir247.fr",
+  // Formulaire de contact : Netlify Forms (demandes visibles dans Netlify → Forms, transfert par e-mail
+  // réglé dans Netlify). Hors Netlify (démo GitHub), le bouton ouvre la messagerie du visiteur.
+  formEndpoint: NETLIFY ? "/" : "",
   phone: "06 62 83 36 53",
   phoneIntl: "+33662833653",
   instagram: "https://www.instagram.com/comptoir247/",
@@ -39,6 +47,7 @@ const CONFIG = {
   locale: "fr_FR",
   lastmod: new Date().toISOString().slice(0, 10),
 };
+CONFIG.demo = !(CONFIG.launched && NETLIFY && process.env.CONTEXT === "production");
 
 /* ------------------------------------------------------------------ */
 /* Icônes (trait, dans l'esprit des visuels Instagram) + logo          */
@@ -148,6 +157,26 @@ const websiteSchema = () => ({
 });
 
 /* ------------------------------------------------------------------ */
+/* Sécurité : politique de contenu (CSP)                               */
+/* ------------------------------------------------------------------ */
+// Seul script en ligne autorisé : celui-ci, identifié par son empreinte.
+// Le modifier ici suffit : l'empreinte est recalculée à chaque build.
+const HEAD_SCRIPT = "try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('is-arriving')}catch(e){}";
+const HEAD_SCRIPT_HASH = crypto.createHash("sha256").update(HEAD_SCRIPT).digest("base64");
+const CSP = [
+  "default-src 'self'",
+  `script-src 'self' 'sha256-${HEAD_SCRIPT_HASH}'`,
+  "style-src 'self' 'unsafe-inline'", // attributs style="" utilisés dans les pages
+  "img-src 'self' data:",
+  "font-src 'self'",
+  "media-src 'self'",
+  "connect-src 'self'", // envoi du formulaire vers Netlify (même origine)
+  "form-action 'self'",
+  "base-uri 'self'",
+  "object-src 'none'",
+].join("; ");
+
+/* ------------------------------------------------------------------ */
 /* Gabarit                                                             */
 /* ------------------------------------------------------------------ */
 function renderFaq(faq) {
@@ -215,6 +244,8 @@ function layout(meta, body) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="${CSP}">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>${meta.title}</title>
 <meta name="description" content="${meta.description}">
 <link rel="canonical" href="${canonical}">
@@ -242,7 +273,7 @@ function layout(meta, body) {
 <link rel="preload" href="${root}assets/fonts/montserrat-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
 ${(meta.preload || []).map((p) => `<link rel="preload" as="image" href="${root}${p}">`).join("\n")}
 <link rel="stylesheet" href="${root}assets/css/style.css?v=${ASSET_V.css}">
-<script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('is-arriving')}catch(e){}</script>
+<script>${HEAD_SCRIPT}</script>
 <script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@graph": graph })}</script>
 </head>
 <body>
@@ -252,7 +283,7 @@ ${SPRITE}
 <header class="site-header">
   <div class="wrap site-header__inner">
     <a class="brand" href="${root}" aria-label="COMPTOIR 247 — accueil">
-      <img class="brand__logo" src="${root}assets/img/logo-comptoir247-240.png" srcset="${root}assets/img/logo-comptoir247-240.png 240w, ${root}assets/img/logo-comptoir247.png 600w" sizes="104px" alt="COMPTOIR 247 — Pour vous servir." width="240" height="245">
+      <img class="brand__logo" src="${root}assets/img/logo-comptoir247-240.png" srcset="${root}assets/img/logo-comptoir247-240.png 240w, ${root}assets/img/logo-comptoir247.png 600w" sizes="138px" alt="COMPTOIR 247 — Pour vous servir." width="240" height="245">
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
     <nav class="nav" id="nav" aria-label="Navigation principale">
@@ -335,16 +366,19 @@ ${body}
 /* ------------------------------------------------------------------ */
 const pagesDir = path.join(__dirname, "pages");
 const sitemap = [];
+const published = new Set(); // fichiers et dossiers publics, copiés dans dist/
 for (const file of fs.readdirSync(pagesDir).filter((f) => f.endsWith(".html")).sort()) {
   const src = fs.readFileSync(path.join(pagesDir, file), "utf8");
   const m = src.match(/^<!--META\s*([\s\S]*?)\s*META-->/);
   if (!m) throw new Error(`META manquant dans ${file}`);
   const meta = JSON.parse(m[1]);
-  const body = src.slice(m[0].length);
+  // Les commentaires HTML des sources sont des notes internes : on ne les publie pas.
+  const body = src.slice(m[0].length).replace(/<!--[\s\S]*?-->\s*/g, "");
   const out = path.join(ROOT, meta.out);
   fs.mkdirSync(path.dirname(out), { recursive: true });
   fs.writeFileSync(out, layout(meta, body));
   if (!meta.noindex) sitemap.push({ loc: `${CONFIG.siteUrl}${meta.url}`, priority: meta.priority ?? 0.7 });
+  published.add(meta.out.split("/")[0]);
   console.log("✓", meta.out);
 }
 
@@ -369,6 +403,7 @@ for (const [from, to] of Object.entries(REDIRECTS)) {
 </head><body><p>Cette page a changé d'adresse : <a href="../${to}/">${target}</a></p></body></html>
 `
   );
+  published.add(from);
   console.log("↪", `${from}/ → ${to}/`);
 }
 
@@ -420,3 +455,36 @@ Sitemap: ${CONFIG.siteUrl}/sitemap.xml
 `
 );
 console.log("✓ sitemap.xml, robots.txt");
+
+/* ------------------------------------------------------------------ */
+/* Netlify : dossier dist/ (seulement les fichiers publics)            */
+/* ------------------------------------------------------------------ */
+// Les sources (_src), la documentation (docs) et les notes (README, CHANGELOG) ne sont pas publiées.
+if (process.argv.includes("--dist")) {
+  const DIST = path.join(ROOT, "dist");
+  fs.rmSync(DIST, { recursive: true, force: true });
+  fs.mkdirSync(DIST);
+  for (const p of [...published, "assets", "favicon.svg", "site.webmanifest", "robots.txt", "sitemap.xml"]) {
+    fs.cpSync(path.join(ROOT, p), path.join(DIST, p), { recursive: true });
+  }
+  // llms.txt est écrit à la main avec les adresses de la démo : on les remplace par celles du site.
+  fs.writeFileSync(path.join(DIST, "llms.txt"), fs.readFileSync(path.join(ROOT, "llms.txt"), "utf8").replaceAll(DEMO_URL, CONFIG.siteUrl));
+
+  // En-têtes HTTP : sécurité (la CSP du serveur ajoute l'interdiction d'afficher le site dans un cadre),
+  // cache long pour la police, et « noindex » sur tout le contenu tant que le site n'est pas lancé.
+  fs.writeFileSync(path.join(DIST, "_headers"), `/*
+  Content-Security-Policy: ${CSP}; frame-ancestors 'none'
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Strict-Transport-Security: max-age=31536000${CONFIG.demo ? "\n  X-Robots-Tag: noindex, nofollow" : ""}
+
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+`);
+  // Redirections permanentes (301) des anciennes adresses, prioritaires sur les pages de secours.
+  fs.writeFileSync(path.join(DIST, "_redirects"), Object.entries(REDIRECTS)
+    .map(([from, to]) => `/${from}/*  /${to}/:splat  301!\n/${from}  /${to}/  301!`).join("\n") + "\n");
+  console.log(`✓ dist/ prêt pour Netlify (${CONFIG.siteUrl}, ${CONFIG.demo ? "noindex" : "indexable"})`);
+}

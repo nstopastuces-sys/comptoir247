@@ -4,7 +4,7 @@
   "url": "/contact/",
   "nav": "contact",
   "priority": 0.6,
-  "title": "Contact — COMPTOIR 247, distributeurs de produits frais en Savoie",
+  "title": "Contact | COMPTOIR 247, produits frais en Savoie",
   "ogTitle": "Contacter COMPTOIR 247",
   "description": "Un projet de distributeur automatique, un emplacement à proposer, des produits à référencer ? Contactez COMPTOIR 247, en Savoie et alentours.",
   "breadcrumb": [{ "name": "Contact", "url": "/contact/" }],
@@ -23,7 +23,9 @@ META-->
 
 <section class="section" style="padding-top:24px">
   <div class="wrap contact-grid">
-    <form class="form reveal" data-mailto="{{email}}" data-endpoint="{{formEndpoint}}" novalidate>
+    <form class="form reveal" name="contact" method="POST" data-netlify="true" netlify-honeypot="_honey" data-mailto="{{email}}" data-endpoint="{{formEndpoint}}">
+      <input type="hidden" name="form-name" value="contact">
+      <input type="hidden" name="subject" value="[Site] Demande de contact">
       <div class="form__hp" aria-hidden="true"><label for="_honey">Ne pas remplir</label><input id="_honey" name="_honey" tabindex="-1" autocomplete="off"></div>
       <fieldset class="field">
         <legend>Vous êtes…</legend>
@@ -36,11 +38,11 @@ META-->
       </fieldset>
       <div class="form__row">
         <div class="field"><label for="nom">Nom et prénom</label><input id="nom" name="nom" autocomplete="name" required></div>
-        <div class="field"><label for="entreprise">Entreprise / commune <span class="muted">(facultatif)</span></label><input id="entreprise" name="entreprise" autocomplete="organization"></div>
+        <div class="field"><label for="entreprise">Raison sociale</label><input id="entreprise" name="raison_sociale" autocomplete="organization" required></div>
       </div>
       <div class="form__row">
         <div class="field"><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email" required></div>
-        <div class="field"><label for="telephone">Téléphone <span class="muted">(facultatif)</span></label><input id="telephone" name="telephone" type="tel" autocomplete="tel"></div>
+        <div class="field"><label for="telephone">Téléphone</label><input id="telephone" name="telephone" type="tel" autocomplete="tel" required></div>
       </div>
       <div class="field"><label for="message">Votre message</label><textarea id="message" name="message" required placeholder="Votre activité, vos produits, l'emplacement envisagé…"></textarea></div>
       <div><button class="btn" type="submit"><span class="btn__in">Envoyer ma demande{{icon:arrow}}</span><span class="btn__door" aria-hidden="true">Envoyer ma demande</span></button></div>

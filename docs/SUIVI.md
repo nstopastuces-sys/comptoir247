@@ -8,7 +8,7 @@ _Dernière mise à jour : 6 novembre 2026_
 | --- | --- |
 | Démo client | En ligne : https://nstopastuces-sys.github.io/comptoir247/ |
 | Indexation | **Désactivée** (`CONFIG.demo = true`) : `noindex` sur toutes les pages |
-| Dépôt | https://github.com/nstopastuces-sys/comptoir247 (branche `main`, déploiement GitHub Pages automatique) |
+| Dépôt | https://github.com/nstopastuces-sys/comptoir247 (branche `main`, déploiement automatique sur Netlify, site officiel ; GitHub Pages pour la démo) |
 | Nom de domaine | À définir |
 | Mise en ligne officielle | Pas encore. Voir [MISE-EN-LIGNE.md](MISE-EN-LIGNE.md) |
 
@@ -31,13 +31,12 @@ _Dernière mise à jour : 6 novembre 2026_
 
 | Information | Où la mettre |
 | --- | --- |
-| **Activer le formulaire** : faire une demande test sur la page Contact, puis cliquer « Activate Form » dans l'e-mail FormSubmit reçu sur contact@comptoir247.fr | Rien à modifier dans le code |
 | Adresses précises et photos de chaque Comptoir (Hugo) | Section `#emplacements` de `_src/pages/notre-expertise.html` |
 | Lien Google My Business du Fonta'Distrib (Hugo) | Section `#cas-client` de `_src/pages/je-m-equipe.html` (commentaire en place) |
-| Validation des blocs « Vente, location, leasing » et « Ce qui est inclus » (textes rédigés sans les conditions réelles) | Sections `#formules` et `#inclus` de `_src/pages/je-m-equipe.html` |
+| Validation des blocs « Achat ou leasing » et « Solution clé en main, c'est-à-dire ? » (textes rédigés sans les conditions réelles) | Sections `#formules` et `#inclus` de `_src/pages/je-m-equipe.html` |
 | Rôle exact de COMPTOIR 247 dans le projet du Fontanil (l'article ne le mentionne pas) | Section `#cas-client` |
 | Plaquette ou grille tarifaire (facultatif) | Section `#formules` |
-| Raison sociale, forme juridique, capital, adresse, SIRET, responsable de publication | `_src/pages/mentions-legales.html` (champs surlignés) |
+| Confirmation du directeur de la publication (actuellement François Husson, Président) | `_src/pages/mentions-legales.html` |
 | Moyens de paiement acceptés sur les bornes (le site dit « paiement par carte ») | Étapes « Comment ça marche ? » (accueil, Notre expertise) et bloc `#inclus` de Je m'équipe |
 | Relecture des textes, notamment l'accompagnement pro et l'après-mise en service | Pages sources dans `_src/pages/` |
 | Nom de domaine souhaité | Voir [MISE-EN-LIGNE.md](MISE-EN-LIGNE.md) |
@@ -46,7 +45,7 @@ _Dernière mise à jour : 6 novembre 2026_
 
 - **Instagram** n'est pas accessible sans compte. La charte a été reprise des captures fournies dans le chat VSCode.
 - **Vidéos** : la vidéo « frigo » de l'accueil a été remplacée par une photo d'un vrai Comptoir (demande client). Une vidéo tournée sur un vrai Comptoir pourrait la remplacer plus tard.
-- **Formulaire de contact** : envoi direct via FormSubmit (gratuit, sans compte) vers contact@comptoir247.fr. Si l'envoi échoue, le visiteur peut ouvrir sa messagerie avec le message pré-rempli.
+- **Formulaire de contact** : Netlify Forms. Les demandes sont visibles dans Netlify → Forms et transférées par e-mail (notification à régler dans Netlify). Sur la démo GitHub, le bouton ouvre la messagerie du visiteur avec le message pré-rempli.
 - **Déploiement GitHub Pages** : d'habitude environ une minute, mais il a déjà échoué une fois (« Timeout ») et bloqué en file d'attente. Remède : relancer une publication (commande dans le README).
 - **Cache navigateur** : GitHub Pages met les fichiers en cache 10 minutes. Le CSS et le JS sont versionnés, donc un simple rechargement suffit ; en cas de doute, Ctrl+F5.
 - **Robots IA sur la démo** : le `robots.txt` n'est pris en compte qu'à la racine d'un domaine, donc pas sur `github.io/comptoir247`. La démo est protégée uniquement par la balise `noindex`.

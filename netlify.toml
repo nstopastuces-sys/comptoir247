@@ -1,0 +1,8 @@
+# Netlify : régénère le site depuis les sources et ne publie que les fichiers publics (dossier dist/).
+# Ce fichier prime sur les réglages de l'interface Netlify (commande et dossier de publication).
+[build]
+  command = "node _src/build.mjs --dist"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"

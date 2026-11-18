@@ -6,3 +6,5 @@ exclude:
   - docs/
   - _src/
   - .gitignore
+  - netlify.toml
+  - dist/

@@ -28,7 +28,7 @@
   --gutter: clamp(16px, 4vw, 40px);
   --ease-door: cubic-bezier(.7, 0, .25, 1);
   --ease-out: cubic-bezier(.2, .8, .2, 1);
-  --header-h: 116px;
+  --header-h: 150px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -177,14 +177,14 @@ button { font: inherit; color: inherit; }
   border-bottom: 1px solid transparent;
   transition: border-color .3s, box-shadow .3s;
 }
-.site-header.is-scrolled { border-bottom-color: var(--line); --header-h: 92px; }
+.site-header.is-scrolled { border-bottom-color: var(--line); --header-h: 100px; }
 .site-header__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: var(--header-h); transition: height .35s var(--ease-out); }
 .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
 /* Logo officiel : assez grand pour que « COMPTOIR 247 » reste lisible, y compris sur mobile */
 .brand__logo { height: calc(var(--header-h) - 12px); width: auto; flex: none; transition: height .35s var(--ease-out); }
 @media (max-width: 560px) {
-  :root { --header-h: 100px; }
-  .site-header.is-scrolled { --header-h: 88px; }
+  :root { --header-h: 124px; }
+  .site-header.is-scrolled { --header-h: 92px; }
 }
 
 .nav { display: flex; align-items: center; gap: 30px; }
@@ -343,6 +343,7 @@ button { font: inherit; color: inherit; }
   min-height: 44px; display: flex; flex-direction: column; justify-content: center;
 }
 .machine__screen strong { color: #fff; font-size: .82rem; }
+@media (max-width: 480px) { .machine__screen { min-height: 5.4rem; } } /* hauteur fixe : le texte change sans faire sauter la page */
 .machine__keys { display: grid; grid-template-columns: repeat(3, 14px); gap: 5px; }
 .machine__keys i { width: 14px; height: 10px; border-radius: 3px; background: linear-gradient(#f2f2f2, #cfcfcf); box-shadow: 0 1px 1px rgba(0,0,0,.25); }
 .machine__keys i:nth-child(10) { background: var(--red); }
@@ -448,7 +449,8 @@ button { font: inherit; color: inherit; }
 
 /* ---------- Secteurs pros ---------- */
 .sectors { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); list-style: none; margin: 0; padding: 0; }
-@media (max-width: 960px) { .sectors { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 960px) { .sectors { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 380px) { .sector a { padding: 16px; gap: 14px; } .sector span { font-size: .95rem; hyphens: auto; overflow-wrap: break-word; } }
 .sector { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .sector a {
   position: relative; display: flex; flex-direction: column; gap: 18px; padding: clamp(20px, 2.6vw, 30px);
@@ -742,6 +744,7 @@ html.is-arriving .curtain { animation: curtain-failsafe 0s linear 3s forwards; }
 
 /* ---------- Formules et prestations (pros) ---------- */
 .spots--offers .spot { align-content: start; }
+@media (min-width: 901px) { .spots--offers { grid-template-columns: repeat(2, 1fr); } }
 .incl { display: grid; grid-template-columns: 1.3fr .7fr; gap: clamp(16px, 2.4vw, 26px); }
 @media (max-width: 900px) { .incl { grid-template-columns: 1fr; } }
 .incl .usecase ul { gap: 10px; }
@@ -762,6 +765,7 @@ html.is-arriving .curtain { animation: curtain-failsafe 0s linear 3s forwards; }
 /* Boutons à texte intérieur : libellés centrés ; .btn-row--stack aligne les boutons sur la même largeur */
 .btn--inside .btn__in { flex: 1; justify-content: center; }
 .btn--inside .btn__door { justify-content: center; }
+@media (max-width: 480px) { .btn--inside { max-width: 100%; } .btn--inside .btn__in { white-space: normal; text-align: center; } }
 .btn-row--stack { display: inline-grid; grid-template-columns: 1fr; }
 .section--ink .case__quote { color: rgba(255,255,255,.9); font-weight: 600; }
 /* Bandeau sur photo (plus chargée qu'une vidéo floue) : voile plus dense pour la lisibilité du titre */

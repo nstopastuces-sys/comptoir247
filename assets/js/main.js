@@ -160,11 +160,9 @@
 
     var setScreen = function (locker) {
       if (!screen) return;
-      if (!locker) {
-        screen.innerHTML = "<strong>Choisissez votre casier</strong>Produits frais &amp; locaux, 24h/24";
-        return;
-      }
-      screen.innerHTML = "<strong>Casier " + locker.getAttribute("data-n") + " · ouvert</strong>" + locker.getAttribute("data-product");
+      var strong = document.createElement("strong");
+      strong.textContent = locker ? "Casier " + locker.getAttribute("data-n") + " · ouvert" : "Choisissez un ou plusieurs casiers";
+      screen.replaceChildren(strong, document.createTextNode(locker ? locker.getAttribute("data-product") : "Produits frais & locaux, 24h/24"));
     };
 
     lockers.forEach(function (l) {
@@ -197,16 +195,18 @@
     }
   }
 
-  /* ---------- Formulaire de contact : envoi direct par e-mail ----------
-     La demande part vers data-endpoint (FormSubmit) qui la transmet par e-mail.
-     En cas d'échec réseau, on propose d'ouvrir la messagerie avec le message pré-rempli. */
+  /* ---------- Formulaire de contact : Netlify Forms ----------
+     La demande est envoyée en arrière-plan à Netlify (data-endpoint), qui la conserve
+     et la transfère par e-mail. Sans data-endpoint (démo hors Netlify), on ouvre la messagerie.
+     En cas d'échec, on propose d'ouvrir la messagerie avec le message pré-rempli. */
   var form = document.querySelector("form[data-mailto]");
   if (form) {
     var params = new URLSearchParams(location.search);
     var preset = params.get("profil");
+    // Comparaison directe (pas de sélecteur CSS construit à partir de l'URL : un paramètre
+    // malformé ferait planter le script et le formulaire partirait sans être traité).
     if (preset) {
-      var radio = form.querySelector('input[name="profil"][value="' + preset + '"]');
-      if (radio) radio.checked = true;
+      form.querySelectorAll('input[name="profil"]').forEach(function (r) { if (r.value === preset) r.checked = true; });
     }
     form.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -215,7 +215,7 @@
       var profil = data.get("profil") || "Demande";
       var body = [
         "Nom : " + (data.get("nom") || ""),
-        "Entreprise / commune : " + (data.get("entreprise") || "-"),
+        "Raison sociale : " + (data.get("raison_sociale") || "-"),
         "Email : " + (data.get("email") || ""),
         "Téléphone : " + (data.get("telephone") || "-"),
         "Profil : " + profil,
@@ -248,24 +248,14 @@
       if (data.get("_honey")) return; // robot
       if (submit) submit.disabled = true;
       say("Envoi en cours…");
+      data.set("subject", subject); // objet de l'e-mail de notification Netlify
       fetch(endpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify({
-          _subject: subject,
-          _replyto: data.get("email") || "",
-          _template: "table",
-          "Nom": data.get("nom") || "",
-          "Entreprise / commune": data.get("entreprise") || "-",
-          "E-mail": data.get("email") || "",
-          "Téléphone": data.get("telephone") || "-",
-          "Profil": profil,
-          "Message": data.get("message") || ""
-        })
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(data).toString()
       })
-        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
-        .then(function (res) {
-          if (res.ok && String(res.j.success) !== "false") {
+        .then(function (r) {
+          if (r.ok) {
             form.reset();
             say("Merci, votre demande est bien envoyée. Nous vous répondons rapidement.", true);
           } else fallback();
