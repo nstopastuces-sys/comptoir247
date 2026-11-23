@@ -347,8 +347,8 @@ ${body}
     <div class="footer__bottom">
       <span>© <span data-year>${new Date().getFullYear()}</span> COMPTOIR 247 — Distributeurs automatiques de produits frais et locaux en Savoie.</span>
       <span>Le bon produit, au bon endroit, au bon moment<span class="dot">.</span></span>
-      <span>Site développé par <a href="https://www.ajas-developpement.fr/" target="_blank" rel="noopener">Ajas Développement</a></span>
     </div>
+    <p class="footer__credit">Site conçu et développé par <a href="https://www.ajas-developpement.fr/" target="_blank" rel="noopener">Ajas Développement</a></p>
   </div>
 </footer>
 <script src="${root}assets/js/main.js?v=${ASSET_V.js}" defer></script>

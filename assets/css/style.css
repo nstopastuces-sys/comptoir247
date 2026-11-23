@@ -667,6 +667,9 @@ fieldset.field { border: 0; padding: 0; margin: 0; }
 .footer__mountains { width: min(380px, 80%); color: var(--ink); margin: 0 0 20px; }
 .footer__bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--line); font-size: .84rem; color: var(--muted); }
 .footer__bottom a { color: inherit; }
+.footer__credit { margin: 22px 0 0; text-align: center; font-size: .95rem; color: var(--ink-2); }
+.site-footer .footer__credit a { color: var(--ink); font-weight: 800; text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 2px; text-underline-offset: 4px; transition: color .2s; }
+.site-footer .footer__credit a:hover, .site-footer .footer__credit a:focus-visible { color: var(--red); }
 .social { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; }
 .social svg { width: 22px; height: 22px; }
 
