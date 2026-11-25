@@ -85,8 +85,13 @@
 
   /* ---------- En-tête ---------- */
   var header = document.querySelector(".site-header");
+  // Seuils différents à l'aller et au retour : pas de bascule répétée autour d'une seule valeur.
+  var scrolled = false;
   var onScroll = function () {
-    if (header) header.classList.toggle("is-scrolled", window.scrollY > 8);
+    if (!header) return;
+    var y = window.scrollY;
+    var next = scrolled ? y > 2 : y > 24;
+    if (next !== scrolled) { scrolled = next; header.classList.toggle("is-scrolled", scrolled); }
   };
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();

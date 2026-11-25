@@ -1,5 +1,10 @@
 # Historique des versions
 
+## 2026-11-25 — En-tête stable sur ordinateur
+
+- **Correctif** : l'en-tête ne tremble plus au début du défilement. En rétrécissant (176 → 104 px), il faisait remonter tout le contenu ; le navigateur recalait alors le défilement sous le seuil et l'en-tête regrandissait, en boucle. La place qu'il occupe dans la page est désormais constante (hauteur perdue rendue en marge), et le seuil de bascule a une marge (24 px à la descente, 2 px à la remontée)
+- Vérification complète du site de production : aucun lien, ancre ou image cassé
+
 ## 2026-11-25 — Ouverture aux moteurs de recherche
 
 - **`launched: true`** : le site de production https://www.comptoir247.fr passe en `index, follow, max-image-preview:large` (404 et pages de redirection : `noindex, follow`), sans en-tête `X-Robots-Tag`, avec le sitemap annoncé dans `robots.txt`

@@ -29,6 +29,7 @@
   --ease-door: cubic-bezier(.7, 0, .25, 1);
   --ease-out: cubic-bezier(.2, .8, .2, 1);
   --header-h: 176px;
+  --header-full: 176px; /* hauteur de l'en-tête en haut de page (réservée dans le flux) */
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -175,7 +176,12 @@ button { font: inherit; color: inherit; }
   backdrop-filter: saturate(1.4) blur(14px);
   -webkit-backdrop-filter: saturate(1.4) blur(14px);
   border-bottom: 1px solid transparent;
-  transition: border-color .3s, box-shadow .3s;
+  /* L'en-tête rétrécit au défilement, mais la place qu'il occupe dans la page ne change pas :
+     la hauteur perdue est rendue en marge basse (même durée, même courbe). Sans cela, tout le contenu
+     remontait de ~70px, le navigateur recalait le défilement sous le seuil, l'en-tête regrandissait…
+     et tremblait en boucle. */
+  margin-bottom: calc(var(--header-full) - var(--header-h));
+  transition: border-color .3s, box-shadow .3s, margin-bottom .35s var(--ease-out);
 }
 .site-header.is-scrolled { border-bottom-color: var(--line); --header-h: 104px; }
 .site-header__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: var(--header-h); transition: height .35s var(--ease-out); }
@@ -183,7 +189,7 @@ button { font: inherit; color: inherit; }
 /* Logo officiel : assez grand pour que « COMPTOIR 247 » reste lisible, y compris sur mobile */
 .brand__logo { height: calc(var(--header-h) - 8px); width: auto; flex: none; transition: height .35s var(--ease-out); }
 @media (max-width: 560px) {
-  :root { --header-h: 140px; }
+  :root { --header-h: 140px; --header-full: 140px; }
   .site-header.is-scrolled { --header-h: 96px; }
 }
 
