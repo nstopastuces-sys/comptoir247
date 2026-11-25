@@ -93,14 +93,14 @@ le site de production Netlify (ni démo GitHub, ni prévisualisations). Rien à 
 > d'un service tiers (mesure d'audience, carte Google Maps, vidéo YouTube, police Google…) doit être déclaré
 > dans la constante `CSP` de `_src/build.mjs`, sinon le navigateur le bloque.
 
-- [ ] Les pages s'affichent sur `https://www.comptoir247.fr`, en HTTPS
-- [ ] Le code source ne contient plus `noindex` (sauf la page 404) : `<meta name="robots" content="index, follow…">`
-- [ ] Pas d'en-tête `X-Robots-Tag` : `curl -sI https://www.comptoir247.fr/ | grep -i robots` ne renvoie rien
-- [ ] `https://comptoir247.netlify.app/` redirige (301) vers `https://www.comptoir247.fr/`
-- [ ] `https://www.comptoir247.fr/robots.txt` annonce le sitemap et autorise les robots IA
-- [ ] `https://www.comptoir247.fr/sitemap.xml` et `/llms.txt` utilisent le domaine définitif
-- [ ] Une adresse inexistante affiche la page « Ce casier est vide »
-- [ ] `/equiper-professionnels/` redirige vers `/je-m-equipe/`
+- [x] Les pages s'affichent sur `https://www.comptoir247.fr`, en HTTPS (vérifié le 25/11/2026 : 6 pages du sitemap en HTTP 200)
+- [x] Le code source ne contient plus `noindex` (sauf la page 404) : `<meta name="robots" content="index, follow…">`
+- [x] Pas d'en-tête `X-Robots-Tag` : `curl -sI https://www.comptoir247.fr/ | grep -i robots` ne renvoie rien
+- [x] `https://comptoir247.netlify.app/` redirige (301) vers `https://www.comptoir247.fr/`
+- [x] `https://www.comptoir247.fr/robots.txt` annonce le sitemap et autorise les robots IA
+- [x] `https://www.comptoir247.fr/sitemap.xml` et `/llms.txt` utilisent le domaine définitif
+- [x] Une adresse inexistante affiche la page « Ce casier est vide »
+- [x] `/equiper-professionnels/` redirige vers `/je-m-equipe/`
 - [ ] Le formulaire de contact arrive bien sur contact@comptoir247.fr
 - [ ] Le partage du lien (WhatsApp, Facebook, LinkedIn) affiche l'image et le titre
 - [ ] Test des données structurées : https://search.google.com/test/rich-results
