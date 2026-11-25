@@ -2,7 +2,7 @@
 
 Site statique de **COMPTOIR 247** (« Pour vous servir. ») : distributeurs automatiques de produits frais et locaux en Savoie, et équipement des professionnels.
 
-- **Démo client (non indexée)** : https://nstopastuces-sys.github.io/comptoir247/
+- **Site officiel (indexé)** : https://www.comptoir247.fr (Netlify)
 - **Suivi du projet** : [docs/SUIVI.md](docs/SUIVI.md)
 - **Check-list de mise en ligne** : [docs/MISE-EN-LIGNE.md](docs/MISE-EN-LIGNE.md)
 - **Historique** : [CHANGELOG.md](CHANGELOG.md)
@@ -20,7 +20,7 @@ Site statique de **COMPTOIR 247** (« Pour vous servir. ») : distributeurs auto
 
 Anciennes adresses `/equiper-professionnels/` et `/distributeurs-produits-frais/` : pages de redirection générées par le build (ancres conservées).
 
-SEO / GEO : balises title/description/canonical/Open Graph, JSON-LD (`Organization`, `Service`, `FAQPage`, `HowTo`, `BreadcrumbList`), encadrés « En bref », FAQ, `sitemap.xml`, `robots.txt` (robots IA autorisés) et `llms.txt`.
+SEO / GEO : balises title/description/canonical/Open Graph, JSON-LD (`Organization`, `Service`, `FAQPage`, `HowTo`, `BreadcrumbList`), encadrés « En bref », FAQ, `sitemap.xml`, `robots.txt` (moteurs de recherche, moteurs de réponse IA et robots d'entraînement distingués, tous autorisés) et `llms.txt`.
 
 ## Modifier le site
 
@@ -37,7 +37,7 @@ node _src/build.mjs
 
 ### À compléter avant la mise en ligne
 
-0. **Indexation** : tant que `CONFIG.launched = false`, toutes les pages sont en `noindex` (robots IA bloqués). Au lancement, passer `launched` à `true` : seul le site de production Netlify devient indexable.
+0. **Indexation** : `CONFIG.launched = true` depuis le 25/11/2026. Seul le site de production Netlify est indexable ; les prévisualisations Netlify, les déploiements de branche et la copie générée à la racine du dépôt restent en `noindex` (balise, en-tête `X-Robots-Tag`, robots IA bloqués). `CONFIG.aiTraining` autorise ou bloque les robots d'entraînement IA sans effet sur le référencement.
 1. **Domaine** : rien à modifier dans le code, l'adresse vient du domaine principal configuré dans Netlify (y compris dans `llms.txt`, réécrit dans `dist/`).
 2. **Formulaire de contact** : Netlify Forms (activer la détection des formulaires et la notification par e-mail dans Netlify, voir docs/MISE-EN-LIGNE.md). E-mail, téléphone et réseaux dans `CONFIG`.
 3. **Mentions légales** : complètes (directeur de la publication à faire confirmer par le client).
@@ -53,9 +53,9 @@ npx serve .
 
 ## Publication
 
-**Netlify (site officiel)** : `netlify.toml` lance `node _src/build.mjs --dist` à chaque push sur `main` et publie `dist/`, qui ne contient que les fichiers publics, avec les en-têtes de sécurité (`_headers`) et les redirections 301 (`_redirects`). Étapes complètes : [docs/MISE-EN-LIGNE.md](docs/MISE-EN-LIGNE.md).
+**Netlify (site officiel)** : `netlify.toml` lance `node _src/build.mjs --dist` à chaque push sur `main` et publie `dist/`, qui ne contient que les fichiers publics, avec les en-têtes de sécurité (`_headers`) et les redirections 301 (`_redirects`, dont `comptoir247.netlify.app` → `www.comptoir247.fr`). Le build tourne chez Netlify : **pas de GitHub Actions** (aucun workflow dans le dépôt). Déploiement manuel si besoin : Netlify → Deploys → Trigger deploy. Test local et étapes complètes : [docs/MISE-EN-LIGNE.md](docs/MISE-EN-LIGNE.md).
 
-**GitHub Pages (démo, à désactiver après le lancement)** : déjà activé : branche `main`, dossier `/ (root)`. Chaque push redéploie la démo en environ une minute. Si GitHub bloque (déploiement en échec « Timeout » ou en file d'attente plusieurs minutes), relancer une publication : `gh api -X POST repos/nstopastuces-sys/comptoir247/pages/builds`. `_config.yml` empêche la publication des fichiers internes (`_src/`, `docs/`, README, CHANGELOG). Passage sur un nom de domaine : voir [docs/MISE-EN-LIGNE.md](docs/MISE-EN-LIGNE.md).
+**GitHub Pages** : désactivé depuis le lancement. `node _src/build.mjs` (sans `--dist`) régénère encore une copie de démo à la racine du dépôt, toujours en `noindex` ; `_config.yml` en exclurait les fichiers internes si Pages était réactivé.
 
 ## Crédits
 

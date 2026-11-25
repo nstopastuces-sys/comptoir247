@@ -1,5 +1,13 @@
 # Historique des versions
 
+## 2026-11-25 — Ouverture aux moteurs de recherche
+
+- **`launched: true`** : le site de production https://www.comptoir247.fr passe en `index, follow, max-image-preview:large` (404 et pages de redirection : `noindex, follow`), sans en-tête `X-Robots-Tag`, avec le sitemap annoncé dans `robots.txt`
+- **`robots.txt`** : trois groupes distincts — moteurs de recherche (Googlebot, Bingbot…), moteurs de réponse IA (OAI-SearchBot, ChatGPT-User, Claude-SearchBot, Claude-User, PerplexityBot, Perplexity-User…) et robots d'entraînement (GPTBot, ClaudeBot, Google-Extended…), tous autorisés ; réglage `aiTraining` pour bloquer ces derniers
+- **Redirection 301** de `comptoir247.netlify.app` vers `www.comptoir247.fr` (évite un doublon indexable)
+- Prévisualisations Netlify, déploiements de branche et copie de démo : toujours en `noindex`
+- Aucun changement de design, de contenu, de formulaire, de mesure d'audience ni d'en-tête de sécurité
+
 ## 2026-11-06 — Photo d'en-tête de « Je m'équipe »
 
 - Documentation à jour (README, suivi, check-list de mise en ligne)

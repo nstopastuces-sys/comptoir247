@@ -2,14 +2,17 @@
 
 Hébergement officiel : **Netlify** (projet `comptoir247`, relié au dépôt GitHub). À chaque push sur `main`,
 Netlify lance `node _src/build.mjs --dist` (voir `netlify.toml`) et publie le dossier `dist/`, qui ne contient
-que les fichiers publics. GitHub Pages ne sert plus que de démo, toujours non indexée.
+que les fichiers publics. GitHub Pages est désactivé (la copie à la racine du dépôt reste générée en « noindex »).
+**Aucune GitHub Action** : le build tourne chez Netlify (quota GitHub Actions épuisé, ne pas créer de workflow).
 
-> **Où on en est (18/11/2026, fin de journée)** — reprendre à l'étape 3 :
-> - Site en ligne sur https://comptoir247.netlify.app (toujours en « noindex »), formulaire actif dans Netlify Forms.
-> - Zone DNS OVH faite et propagée : `@ A 75.2.60.5`, `www CNAME comptoir247.netlify.app.` (MX, SPF et DKIM intacts).
-> - Netlify était en train de créer le certificat HTTPS : tant qu'il n'est pas prêt, il refuse de changer le domaine principal.
-> - **Prochaine action** : quand Netlify → Domain management → HTTPS affiche le certificat actif, passer `www.comptoir247.fr` en domaine principal (Options → Set as primary domain), puis étape 4.
-> - En attente : confirmation des notifications e-mail par le client (lien Netlify reçu sur contact@comptoir247.fr) ; e-mails de test arrivés en indésirables chez nous → marquer « pas un spam ».
+> **Où on en est (25/11/2026)** — reprendre à l'étape 6 :
+> - **Site en ligne et ouvert aux moteurs de recherche sur https://www.comptoir247.fr** (`launched: true` depuis le 25/11/2026).
+> - Redirections 301 : `http://` → `https://`, `comptoir247.fr` → `www.comptoir247.fr`, `comptoir247.netlify.app` → `www.comptoir247.fr`.
+> - Formulaire : Netlify Forms actif, notifications e-mail vers notre adresse confirmées.
+> - Google Analytics 4 (`G-8BZW1694P1`) derrière le bandeau cookies : vérifier le rapport Temps réel après « Accepter ».
+> - GitHub Pages désactivé (l'ancienne adresse de démo ne fonctionne plus).
+> - **En attente du client** : validation des textes, confirmation des notifications sur contact@ (lien Netlify), directeur de la publication, adresses/photos des Comptoirs, lien Google My Business du Fonta'Distrib.
+> - **Prochaine action** : étape 6 (Search Console, Bing Webmaster Tools, Google Business).
 
 ## 1. Contenus
 
@@ -26,7 +29,7 @@ que les fichiers publics. GitHub Pages ne sert plus que de démo, toujours non i
 - [x] Pousser le dépôt : Netlify déploie tout seul (Deploys → dernier déploiement « Published »)
 - [x] Ouvrir `https://comptoir247.netlify.app` (adresse visible dans Project overview) : les pages s'affichent
 - [x] **Forms → Enable form detection**, puis relancer un déploiement (Deploys → Trigger deploy → Deploy project) : le formulaire « contact » apparaît dans Forms
-- [ ] Envoyer une demande test depuis la page Contact : elle apparaît dans **Forms → contact** (premier test probablement classé en spam par Netlify : regarder le filtre Spam, écrire un message réaliste)
+- [x] Envoyer une demande test depuis la page Contact : elle apparaît dans **Forms → contact** (premier test probablement classé en spam par Netlify : regarder le filtre Spam, écrire un message réaliste)
 - [x] **Forms → Submission notifications → Add notification → Email notification** (gratuit ; ne pas confondre avec les notifications de *déploiement*, payantes) : notre adresse ajoutée et confirmée
 - [ ] contact@comptoir247.fr ajoutée : **le client doit cliquer « Confirm notifications »** dans l'e-mail Netlify (message envoyé au client le 18/11). Solution de secours sans le client : adresse relais OVH (`formulaire@` redirigée vers contact@ et vers nous), à mettre dans Netlify à la place
 - [ ] Une nouvelle demande test arrive bien par e-mail, dans la boîte de réception (au premier e-mail : « pas un courrier indésirable », chez nous et chez le client)
@@ -40,14 +43,39 @@ que les fichiers publics. GitHub Pages ne sert plus que de démo, toujours non i
   - domaine nu : enregistrement **A** vers l'adresse indiquée par Netlify (habituellement `75.2.60.5`)
   - `www` : enregistrement **CNAME** vers `comptoir247.netlify.app.` (supprimer d'abord **toutes** les autres lignes `www`, y compris le TXT `3|welcome`, sinon OVH refuse : « CNAME and other data »)
 - [x] Propagation DNS vérifiée (serveurs OVH, Cloudflare et Google)
-- [ ] Netlify affiche les deux domaines vérifiés (plus de « Pending DNS verification ») et le certificat HTTPS actif
-- [ ] Netlify → Domain management : `www.comptoir247.fr` en **domaine principal** (l'autre redirige vers lui) — impossible tant que le certificat est en cours de création
+- [x] Netlify affiche les deux domaines vérifiés et le certificat HTTPS actif (Let's Encrypt, renouvelé automatiquement)
+- [x] Netlify → Domain management : `www.comptoir247.fr` en **domaine principal** (l'autre redirige vers lui) — impossible tant que le certificat est en cours de création
 
 ## 4. Ouvrir le site aux moteurs de recherche
 
-- [ ] Dans `_src/build.mjs` : `launched: true`. L'adresse du site vient automatiquement de Netlify (domaine principal).
-- [ ] `node _src/build.mjs`, commit, push
-- [ ] GitHub → dépôt → Settings → Pages : **désactiver GitHub Pages** (la démo n'est plus utile et ferait doublon)
+- [x] Dans `_src/build.mjs` : `launched: true`. L'adresse du site vient automatiquement de Netlify (domaine principal, variable `URL`).
+- [x] `node _src/build.mjs`, commit, push (25/11/2026)
+
+Ce que fait `launched: true`, **uniquement sur le site de production Netlify** (`CONTEXT=production`) :
+
+| | Production (`www.comptoir247.fr`) | Prévisualisations Netlify, branches, copie GitHub |
+| --- | --- | --- |
+| Balise `robots` | `index, follow, max-image-preview:large` (404 et pages de redirection : `noindex, follow`) | `noindex, nofollow, noarchive, nosnippet, noimageindex` |
+| En-tête `X-Robots-Tag` | absent | `noindex, nofollow` |
+| `robots.txt` | tout autorisé, sitemap annoncé | robots IA bloqués, pas de sitemap |
+| `_redirects` | `comptoir247.netlify.app` → domaine principal (301) | — |
+
+`robots.txt` de production, trois groupes : moteurs de recherche (Googlebot, Bingbot, Applebot, DuckDuckBot),
+moteurs de réponse IA qui citent les pages avec un lien (OAI-SearchBot, ChatGPT-User, Claude-SearchBot, Claude-User,
+PerplexityBot, Perplexity-User…), robots d'entraînement des modèles (GPTBot, ClaudeBot, Google-Extended,
+Applebot-Extended, CCBot…). Ces derniers sont autorisés ; pour les bloquer sans toucher au référencement :
+`aiTraining: false` dans `_src/build.mjs`.
+
+Tester en local avant de pousser (simulation des variables Netlify) :
+
+```bash
+NETLIFY=true CONTEXT=production URL=https://www.comptoir247.fr SITE_NAME=comptoir247 node _src/build.mjs --dist
+NETLIFY=true CONTEXT=deploy-preview URL=https://www.comptoir247.fr SITE_NAME=comptoir247 node _src/build.mjs --dist
+```
+
+La dernière ligne affiche `indexable` ou `noindex` ; vérifier `dist/robots.txt`, `dist/_headers`, `dist/_redirects`.
+Relancer ensuite `node _src/build.mjs` (sans variables) pour remettre la copie de la racine en mode démo.
+- [x] GitHub → dépôt → Settings → Pages : **désactiver GitHub Pages** (la démo n'est plus utile et ferait doublon)
 
 ## 4 bis. Mesure d'audience (Google Analytics 4, balise gtag.js directe)
 
@@ -67,6 +95,8 @@ le site de production Netlify (ni démo GitHub, ni prévisualisations). Rien à 
 
 - [ ] Les pages s'affichent sur `https://www.comptoir247.fr`, en HTTPS
 - [ ] Le code source ne contient plus `noindex` (sauf la page 404) : `<meta name="robots" content="index, follow…">`
+- [ ] Pas d'en-tête `X-Robots-Tag` : `curl -sI https://www.comptoir247.fr/ | grep -i robots` ne renvoie rien
+- [ ] `https://comptoir247.netlify.app/` redirige (301) vers `https://www.comptoir247.fr/`
 - [ ] `https://www.comptoir247.fr/robots.txt` annonce le sitemap et autorise les robots IA
 - [ ] `https://www.comptoir247.fr/sitemap.xml` et `/llms.txt` utilisent le domaine définitif
 - [ ] Une adresse inexistante affiche la page « Ce casier est vide »

@@ -1,16 +1,17 @@
 # Suivi du projet — site COMPTOIR 247
 
-_Dernière mise à jour : 6 novembre 2026_
+_Dernière mise à jour : 25 novembre 2026_
 
 ## État actuel
 
 | Élément | État |
 | --- | --- |
-| Démo client | En ligne : https://nstopastuces-sys.github.io/comptoir247/ |
-| Indexation | **Désactivée** (`CONFIG.demo = true`) : `noindex` sur toutes les pages |
-| Dépôt | https://github.com/nstopastuces-sys/comptoir247 (branche `main`, déploiement automatique sur Netlify, site officiel ; GitHub Pages pour la démo) |
-| Nom de domaine | À définir |
-| Mise en ligne officielle | Pas encore. Voir [MISE-EN-LIGNE.md](MISE-EN-LIGNE.md) |
+| Site officiel | En ligne : https://www.comptoir247.fr (Netlify, HTTPS) |
+| Indexation | **Activée** depuis le 25/11/2026 (`launched: true`) sur la production uniquement ; prévisualisations Netlify en `noindex` |
+| Dépôt | https://github.com/nstopastuces-sys/comptoir247 (branche `main`, build et déploiement automatiques par Netlify, sans GitHub Actions) |
+| Nom de domaine | `www.comptoir247.fr` (principal) ; `comptoir247.fr` et `comptoir247.netlify.app` redirigent en 301 |
+| Démo GitHub Pages | Désactivée |
+| Reste à faire | Search Console, Bing Webmaster Tools, Google Business : voir [MISE-EN-LIGNE.md](MISE-EN-LIGNE.md), étape 6 |
 
 ## Ce qui est fait
 
@@ -39,16 +40,16 @@ _Dernière mise à jour : 6 novembre 2026_
 | Confirmation du directeur de la publication (actuellement François Husson, Président) | `_src/pages/mentions-legales.html` |
 | Moyens de paiement acceptés sur les bornes (le site dit « paiement par carte ») | Étapes « Comment ça marche ? » (accueil, Notre expertise) et bloc `#inclus` de Je m'équipe |
 | Relecture des textes, notamment l'accompagnement pro et l'après-mise en service | Pages sources dans `_src/pages/` |
-| Nom de domaine souhaité | Voir [MISE-EN-LIGNE.md](MISE-EN-LIGNE.md) |
 
 ## Points d'attention
 
 - **Instagram** n'est pas accessible sans compte. La charte a été reprise des captures fournies dans le chat VSCode.
 - **Vidéos** : la vidéo « frigo » de l'accueil a été remplacée par une photo d'un vrai Comptoir (demande client). Une vidéo tournée sur un vrai Comptoir pourrait la remplacer plus tard.
 - **Formulaire de contact** : Netlify Forms. Les demandes sont visibles dans Netlify → Forms et transférées par e-mail (notification à régler dans Netlify). Sur la démo GitHub, le bouton ouvre la messagerie du visiteur avec le message pré-rempli.
-- **Déploiement GitHub Pages** : d'habitude environ une minute, mais il a déjà échoué une fois (« Timeout ») et bloqué en file d'attente. Remède : relancer une publication (commande dans le README).
-- **Cache navigateur** : GitHub Pages met les fichiers en cache 10 minutes. Le CSS et le JS sont versionnés, donc un simple rechargement suffit ; en cas de doute, Ctrl+F5.
-- **Robots IA sur la démo** : le `robots.txt` n'est pris en compte qu'à la racine d'un domaine, donc pas sur `github.io/comptoir247`. La démo est protégée uniquement par la balise `noindex`.
+- **GitHub Actions** : quota épuisé, ne pas en utiliser. Netlify construit le site lui-même à chaque push sur `main` ; tester le build en local avant de pousser (commandes dans [MISE-EN-LIGNE.md](MISE-EN-LIGNE.md), étape 4).
+- **Cache navigateur** : le CSS et le JS sont versionnés, donc un simple rechargement suffit ; en cas de doute, Ctrl+F5.
+- **Indexation** : seul le contexte Netlify `production` est indexable. Prévisualisations et déploiements de branche gardent `noindex` (balise + en-tête `X-Robots-Tag`) et un `robots.txt` qui bloque les robots IA.
+- **Robots d'entraînement IA** (GPTBot, ClaudeBot, Google-Extended…) : autorisés (`aiTraining: true`). Les bloquer n'a aucun effet sur Google, Bing ni sur les réponses citées de ChatGPT, Claude ou Perplexity.
 
 ## Historique
 

@@ -29,7 +29,10 @@ const DEMO_URL = "https://nstopastuces-sys.github.io/comptoir247";
 const CONFIG = {
   // Lancement : passer à true, commit, push. Seul le site de production Netlify devient alors
   // indexable ; GitHub Pages et les prévisualisations Netlify restent en « noindex ».
-  launched: false,
+  launched: true,
+  // Robots d'entraînement des modèles d'IA (GPTBot, ClaudeBot, Google-Extended…) : true = autorisés.
+  // Sans effet sur Google, Bing et les moteurs de réponse IA (ChatGPT, Claude, Perplexity), toujours autorisés.
+  aiTraining: true,
   siteUrl: NETLIFY && process.env.URL ? process.env.URL.replace(/\/+$/, "") : DEMO_URL, // sans "/" final
   name: "COMPTOIR 247",
   slogan: "Pour vous servir.",
@@ -428,41 +431,37 @@ ${sitemap.map((u) => `  <url><loc>${u.loc}</loc><lastmod>${CONFIG.lastmod}</last
 </urlset>
 `
 );
+// Robots de recherche (les pages peuvent être citées avec un lien) et robots d'entraînement
+// (le contenu sert à entraîner des modèles d'IA, sans lien vers le site).
+const SEARCH_BOTS = ["Googlebot", "Bingbot", "Applebot", "DuckDuckBot"];
+const AI_SEARCH_BOTS = ["OAI-SearchBot", "ChatGPT-User", "Claude-SearchBot", "Claude-User", "PerplexityBot", "Perplexity-User", "DuckAssistBot", "MistralAI-User"];
+const AI_TRAINING_BOTS = ["GPTBot", "ClaudeBot", "anthropic-ai", "Google-Extended", "Applebot-Extended", "CCBot", "meta-externalagent", "Bytespider"];
+const group = (bots, rule) => `${bots.map((b) => `User-agent: ${b}`).join("\n")}\n${rule}: /`;
 // En démo : les moteurs classiques peuvent lire les pages pour y voir le « noindex »
 // (un Disallow les en empêcherait), les robots IA sont bloqués, pas de sitemap annoncé.
-const AI_BOTS = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-SearchBot", "anthropic-ai", "PerplexityBot", "Google-Extended", "Applebot-Extended", "CCBot", "Bytespider", "meta-externalagent"];
 if (CONFIG.demo) fs.writeFileSync(
   path.join(ROOT, "robots.txt"),
   `# COMPTOIR 247 — version de démonstration, non indexée
 User-agent: *
 Allow: /
 
-${AI_BOTS.map((b) => `User-agent: ${b}\nDisallow: /`).join("\n\n")}
+${[...AI_SEARCH_BOTS, ...AI_TRAINING_BOTS].map((b) => `User-agent: ${b}\nDisallow: /`).join("\n\n")}
 `
 );
 else fs.writeFileSync(
   path.join(ROOT, "robots.txt"),
-  `# COMPTOIR 247
+  `# COMPTOIR 247 — ${CONFIG.siteUrl}/
 User-agent: *
 Allow: /
 
-# Moteurs de réponse IA (GEO) : bienvenus
-User-agent: GPTBot
-Allow: /
-User-agent: OAI-SearchBot
-Allow: /
-User-agent: ChatGPT-User
-Allow: /
-User-agent: ClaudeBot
-Allow: /
-User-agent: Claude-SearchBot
-Allow: /
-User-agent: PerplexityBot
-Allow: /
-User-agent: Google-Extended
-Allow: /
-User-agent: Applebot-Extended
-Allow: /
+# Moteurs de recherche
+${group(SEARCH_BOTS, "Allow")}
+
+# Moteurs de réponse IA : ChatGPT, Claude, Perplexity… (pages citées avec un lien)
+${group(AI_SEARCH_BOTS, "Allow")}
+
+# Entraînement des modèles d'IA (réglage aiTraining dans _src/build.mjs)
+${group(AI_TRAINING_BOTS, CONFIG.aiTraining ? "Allow" : "Disallow")}
 
 Sitemap: ${CONFIG.siteUrl}/sitemap.xml
 `
@@ -484,7 +483,7 @@ if (process.argv.includes("--dist")) {
   fs.writeFileSync(path.join(DIST, "llms.txt"), fs.readFileSync(path.join(ROOT, "llms.txt"), "utf8").replaceAll(DEMO_URL, CONFIG.siteUrl));
 
   // En-têtes HTTP : sécurité (la CSP du serveur ajoute l'interdiction d'afficher le site dans un cadre),
-  // cache long pour la police, et « noindex » sur tout le contenu tant que le site n'est pas lancé.
+  // cache long pour la police, et « noindex » sur tout le contenu hors production (ou tant que le site n'est pas lancé).
   fs.writeFileSync(path.join(DIST, "_headers"), `/*
   Content-Security-Policy: ${CSP}; frame-ancestors 'none'
   X-Frame-Options: DENY
@@ -497,7 +496,12 @@ if (process.argv.includes("--dist")) {
   Cache-Control: public, max-age=31536000, immutable
 `);
   // Redirections permanentes (301) des anciennes adresses, prioritaires sur les pages de secours.
-  fs.writeFileSync(path.join(DIST, "_redirects"), Object.entries(REDIRECTS)
+  // Site lancé : l'adresse technique <projet>.netlify.app renvoie vers le domaine principal
+  // (sinon doublon indexable). Les prévisualisations (deploy-preview-1--<projet>.netlify.app…) ne sont pas concernées.
+  const netlifyHost = process.env.SITE_NAME ? `${process.env.SITE_NAME}.netlify.app` : "";
+  const hostRedirect = !CONFIG.demo && netlifyHost && !CONFIG.siteUrl.includes(netlifyHost)
+    ? `https://${netlifyHost}/*  ${CONFIG.siteUrl}/:splat  301!\n` : "";
+  fs.writeFileSync(path.join(DIST, "_redirects"), hostRedirect + Object.entries(REDIRECTS)
     .map(([from, to]) => `/${from}/*  /${to}/:splat  301!\n/${from}  /${to}/  301!`).join("\n") + "\n");
   console.log(`✓ dist/ prêt pour Netlify (${CONFIG.siteUrl}, ${CONFIG.demo ? "noindex" : "indexable"})`);
 }
